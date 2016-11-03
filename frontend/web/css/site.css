@@ -36,6 +36,13 @@ body {
     font-style: italic;
 }
 
+/*nav#w0.navbar-default, nav#w1.navbar-default {
+    background: none !important;
+    border: 0 !important;
+    min-height: 0 !important;
+    margin-bottom: 0 !important;
+}*/
+
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
     position: relative;

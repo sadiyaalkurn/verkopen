@@ -4,26 +4,170 @@
 
 $this->title = 'Verkopen.nl';
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Verkopen.nl</h1>
-        <p><a class="btn btn-lg btn-success" href="#">Get started</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula in arcu sed eleifend. Nam aliquam, ex in scelerisque vehicula, erat nibh pellentesque diam, a consectetur quam nibh ut dui. Fusce cursus dolor sapien, sit amet feugiat purus pulvinar nec. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce lacus velit, feugiat quis fringilla ut, viverra id purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas lobortis pulvinar dolor at pulvinar.
-        <br /><br />
-        Cras ut ultrices sem. Cras molestie ligula ut mauris laoreet euismod. Pellentesque diam odio, tincidunt eget nunc ut, aliquam ultricies justo. Sed odio metus, euismod sit amet auctor nec, iaculis ut leo. Donec sodales lorem mauris, et sollicitudin dui tempus vel. Sed ac consequat ipsum. In lacinia aliquam enim, ac convallis est posuere et.
-        <br /><br />
-        Nullam mollis, ante sed condimentum convallis, justo arcu ornare sapien, a consectetur erat urna vel quam. Nunc mattis justo vel diam bibendum egestas. Nunc at ornare erat, quis porttitor augue. Sed imperdiet lobortis faucibus. Pellentesque maximus, neque vel placerat fringilla, ex ipsum dictum sem, ac interdum ligula massa sed nibh. Curabitur aliquet faucibus sapien, et varius nisl ultricies eleifend. Aenean malesuada accumsan nisi, at tincidunt lacus volutpat quis. Nulla egestas eu ante sit amet faucibus. Sed non vehicula leo. Sed semper, ex eget tristique auctor, mi lacus posuere enim, quis tincidunt nisi felis eget tortor. Fusce vulputate nisl a lectus ullamcorper aliquam. Mauris gravida porttitor vulputate. Ut facilisis neque justo, eget eleifend nisi pulvinar quis. Sed sed ex aliquam, laoreet dui id, rhoncus enim. Cras et scelerisque augue.
-        <br /><br />
-        Nullam finibus nulla eget nisl volutpat, non pharetra justo finibus. Mauris et lacus maximus, condimentum neque dapibus, dictum tellus. Cras vitae justo libero. Morbi molestie odio nec enim malesuada, sed faucibus massa rhoncus. Donec semper nisi lorem, a mollis justo hendrerit eu. Nulla facilisi. Nunc tellus lectus, luctus non gravida aliquet, laoreet ornare risus. Nullam vehicula suscipit consequat. Donec nec est pharetra, fermentum erat ac, condimentum risus. Duis ac neque eu quam porta hendrerit vitae id odio. In semper ligula eget sem ullamcorper, nec luctus turpis malesuada.
-        <br /><br />
-        Phasellus nec congue metus. Donec pellentesque ipsum eget tellus ultricies, et molestie ipsum tristique. Donec efficitur sapien magna, maximus ornare ex mollis at. Vivamus eget est vel erat ornare congue. Morbi vitae nibh lectus. Suspendisse interdum venenatis turpis, interdum iaculis orci eleifend quis. Donec mollis sollicitudin elit, eu porta augue sagittis sit amet. Proin vitae felis in ante rutrum condimentum. Fusce in tempus dui. Nunc ac tortor at nunc imperdiet convallis. Nam fringilla sapien ut augue pellentesque, a tempus velit facilisis. Suspendisse potenti. Morbi mauris nisi, pellentesque id nulla id, lacinia tincidunt felis. 
+<!-- Start Banner  -->
+    <div class="home-banner">
+      <!-- <img src="images/banner-01.jpg" alt=""> -->
+      <div class="owl-carousel owl-theme" id="banner-carousel">
+        <div class="items">
+          <figure>
+            <figcaption>
+              <div class="banner-img">
+                 <img src="images/banner-01.jpg" alt="" class="">
+              </div>
+              <div class="container">
+                <div class="fixed-box">
+                  <h2>Your digital future starts here</h2>
+                  <p><a href="" class="btn btn-warning radius-large btn-lg">Get Started</a></p>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
         </div>
 
+        <div class="items">
+          <figure>
+            <figcaption>
+              <div class="banner-img">
+                 <img src="images/banner-01.jpg" alt="" class="">
+              </div>
+              <div class="container">
+                <div class="fixed-box">
+                  <h2>Your digital future starts here</h2>
+                  <p><a href="" class="btn btn-warning radius-large btn-lg">Get Started</a></p>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="items">
+          <figure>
+            <figcaption>
+              <div class="banner-img">
+                 <img src="images/banner-01.jpg" alt="" class="">
+              </div>
+              <div class="container">
+                <div class="fixed-box">
+                  <h2>Your digital future starts here</h2>
+                  <p><a href="" class="btn btn-warning radius-large btn-lg">Get Started</a></p>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
     </div>
-</div>
+    <!-- End Banner  -->
+    <!-- Start Welcome text  -->
+    <div class="welcome-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 wow fadeIn">
+            <h2>Welcome to Vekropen.nl</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Welcome text  -->
+
+    <!-- Start our partner  -->
+    <div class="our-partners">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2>Our Partners</h2>
+            <div class="row">
+              <div class="col-sm-20 wow bounceIn">
+                <a href="#"><img src="images/partner-logo-01.jpg" class="partner-logo" alt=""></a>
+              </div>
+              <div class="col-sm-20 wow bounceIn">
+                <a href="#"><img src="images/partner-logo-02.jpg" class="partner-logo" alt=""></a>
+              </div>
+              <div class="col-sm-20 wow bounceIn">
+                <a href="#"><img src="images/partner-logo-03.jpg" class="partner-logo" alt=""></a>
+              </div>
+              <div class="col-sm-20 wow bounceIn">
+                <a href="#"><img src="images/partner-logo-04.jpg" class="partner-logo" alt=""></a>
+              </div>
+              <div class="col-sm-20 wow bounceIn">
+                <a href="#"><img src="images/partner-logo-05.jpg" class="partner-logo" alt=""></a>
+              </div>
+              <div class="col-sm-20 wow bounceIn">
+                <a href="#"><img src="images/partner-logo-06.jpg" class="partner-logo" alt=""></a>
+              </div>
+              <div class="col-sm-20 wow bounceIn">
+                <a href="#"><img src="images/partner-logo-07.jpg" class="partner-logo" alt=""></a>
+              </div>
+              <div class="col-sm-20 wow bounceIn">
+                <a href="#"><img src="images/partner-logo-08.jpg" class="partner-logo" alt=""></a>
+              </div>
+              <div class="col-sm-20 wow bounceIn">
+                <a href="#"><img src="images/partner-logo-09.jpg" class="partner-logo" alt=""></a>
+              </div>
+              <div class="col-sm-20 wow bounceIn">
+                <a href="#"><img src="images/partner-logo-10.jpg" class="partner-logo" alt=""></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End our-partner  -->
+
+    <!-- Start How it work  -->
+    <div class="how-it-work">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 wow fadeIn">
+            <h2>How it Work?</h2>
+            <div class="row">
+              <div class="dash-line">
+                <div class="col-sm-4">
+                  <img src="images/step-01.png" alt="">
+                  <p>Place an Ad Over Multiple <br> Marketplaces</p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="images/step-02.png" alt="">
+                  <p>Review ads stats on each <br> Marketplace</p>
+                </div>
+                <div class="col-sm-4">
+                  <img src="images/step-03.png" alt="">
+                  <p>Monitor the Most Profitable Platform <br> for your Advertisement</p>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End How it work  -->
+
+    <!-- Start testimonial  -->
+    <div class="home-testimonial">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <img src="images/quote.png" alt="" class="quote ">
+            <div class="owl-carousel owl-theme wow fadeIn" id="testimonial-carousel">
+
+              <div class="items">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <h4>-JOHN ALEXIS</h4>
+              </div>
+              <div class="items">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <h4>-JOHN ALEXIS</h4>
+              </div>
+              <div class="items">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <h4>-JOHN ALEXIS</h4>
+              </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End testimonial  -->
+    
