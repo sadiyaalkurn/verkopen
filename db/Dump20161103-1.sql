@@ -1,4 +1,4 @@
--- MySQL dump 10.15  Distrib 10.0.27-MariaDB, for debian-linux-gnu (i686)
+-- MySQL dump 10.15  Distrib 10.0.27-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: verkopen
 -- ------------------------------------------------------
@@ -198,6 +198,7 @@ CREATE TABLE `profile` (
   `state` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `zipcode` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `street` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`user_id`),
   CONSTRAINT `fk_user_profile` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -209,7 +210,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES (2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Ansai','saas','saas','hkjhj','jhjhjk','kjhjkhkhj');
+INSERT INTO `profile` VALUES (2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Ansai','saas','saas','hkjhj','jhjhjk','kjhjkhkhj',NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Riya','Khan','Nagpur','MH','440011','1236547890',NULL);
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,7 +236,7 @@ CREATE TABLE `social_account` (
   UNIQUE KEY `account_unique_code` (`code`),
   KEY `fk_user_account` (`user_id`),
   CONSTRAINT `fk_user_account` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,6 +245,7 @@ CREATE TABLE `social_account` (
 
 LOCK TABLES `social_account` WRITE;
 /*!40000 ALTER TABLE `social_account` DISABLE KEYS */;
+INSERT INTO `social_account` VALUES (1,2,'facebook','336520570039533','{\"name\":\"Sadiya Farheen\",\"email\":\"sadiya.alkurn@gmail.com\",\"id\":\"336520570039533\"}',NULL,NULL,'sadiya.alkurn@gmail.com',NULL),(2,2,'google','102403432471760227851','{\"kind\":\"plus#person\",\"etag\":\"\\\"xw0en60W6-NurXn4VBU-CMjSPEw/Q-TsNCjR-AHi13I2UtoDLNiYstY\\\"\",\"emails\":[{\"value\":\"sadiya.alkurn@gmail.com\",\"type\":\"account\"}],\"objectType\":\"person\",\"id\":\"102403432471760227851\",\"displayName\":\"Sadiya Farheen\",\"name\":{\"familyName\":\"Farheen\",\"givenName\":\"Sadiya\"},\"url\":\"https://plus.google.com/102403432471760227851\",\"image\":{\"url\":\"https://lh5.googleusercontent.com/-BNyAP_Gi6w0/AAAAAAAAAAI/AAAAAAAAAEI/s03inoqsPTo/photo.jpg?sz=50\",\"isDefault\":false},\"placesLived\":[{\"value\":\"nagpur\",\"primary\":true}],\"isPlusUser\":true,\"language\":\"en\",\"circledByCount\":4,\"verified\":false}',NULL,NULL,'sadiya.alkurn@gmail.com',NULL);
 /*!40000 ALTER TABLE `social_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,7 +272,7 @@ CREATE TABLE `token` (
 
 LOCK TABLES `token` WRITE;
 /*!40000 ALTER TABLE `token` DISABLE KEYS */;
-INSERT INTO `token` VALUES (2,'RwpkKU3-fVpwlw2IOKLnaG04_N9M-RJr',1477824988,0),(3,'2A0Ro0x0Fvn03XsQyS27dXhT_2_JqnQl',1477830822,0),(4,'nUgBstpGvSWLpbYxI7hoGE0hxA9crsz9',1477841525,0);
+INSERT INTO `token` VALUES (2,'RwpkKU3-fVpwlw2IOKLnaG04_N9M-RJr',1477824988,0),(3,'2A0Ro0x0Fvn03XsQyS27dXhT_2_JqnQl',1477830822,0),(4,'nUgBstpGvSWLpbYxI7hoGE0hxA9crsz9',1477841525,0),(5,'EOirXBLxlFuv3pL7pWZGOAA4IMaMi5qe',1477995611,0);
 /*!40000 ALTER TABLE `token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,7 +300,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_unique_email` (`email`),
   UNIQUE KEY `user_unique_username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -307,7 +309,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'admin','sadiya.alkurn@gmail.com','$2y$12$gUUmL/ZG7557HdMaLPmOwuDBN/hs.L.3hVAVexcuhoxhsGi5PoUIG','gQG7pLm6ZHFJOY1mpjrVtBhLPm1P2KEb',123654789,NULL,NULL,'127.0.0.1',1477824988,1477824988,0,NULL),(3,'sadiya','fw.ansaris@gmail.com','$2y$12$Aw16ygJrbaH/XhiePGN5O.6GvKVKT1ndxiK.e9Apo/imuUwtFQAGW','0xjRDBz-QnHbK5wwfzlm6hyTcdTHFmMS',NULL,NULL,NULL,'127.0.0.1',1477830822,1477830822,0,NULL),(4,'saasas','fw.11ansaris@gmail.com','$2y$12$MG.Hb9uOqok292A711a8jOOu/BdWdKQrSpa6Pw40qPL8Hfq7h1rAS','UmZSzfb1kq8zr_T_QHw4M0ZrKNWnPh7P',123456,NULL,NULL,'127.0.0.1',1477841525,1477841525,0,NULL);
+INSERT INTO `user` VALUES (2,'admin','sadiya.alkurn@gmail.com','$2y$12$gUUmL/ZG7557HdMaLPmOwuDBN/hs.L.3hVAVexcuhoxhsGi5PoUIG','gQG7pLm6ZHFJOY1mpjrVtBhLPm1P2KEb',123654789,NULL,NULL,'127.0.0.1',1477824988,1477824988,0,NULL),(3,'sadiya','fw.ansaris@gmail.com','$2y$12$Aw16ygJrbaH/XhiePGN5O.6GvKVKT1ndxiK.e9Apo/imuUwtFQAGW','0xjRDBz-QnHbK5wwfzlm6hyTcdTHFmMS',NULL,NULL,NULL,'127.0.0.1',1477830822,1477830822,0,NULL),(4,'saasas','fw.11ansaris@gmail.com','$2y$12$MG.Hb9uOqok292A711a8jOOu/BdWdKQrSpa6Pw40qPL8Hfq7h1rAS','UmZSzfb1kq8zr_T_QHw4M0ZrKNWnPh7P',123456,NULL,NULL,'127.0.0.1',1477841525,1477841525,0,NULL),(5,'riya','riya.alkurn@gmail.com','$2y$12$rpfLS.USeCJ/eeWofVjdMeKSpoizNNO141rjBY5ZqEdeysAwltacm','6rUKLq5Wmndv9IWkF2_-liyAgtw-TvUd',NULL,NULL,NULL,'127.0.0.1',1477995611,1477995611,0,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -320,4 +322,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-30 22:43:01
+-- Dump completed on 2016-11-03 12:27:36
