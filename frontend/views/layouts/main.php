@@ -56,6 +56,10 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';*/
+        $menuItems[] = ['label' => 'Profile', 'url' => ['/user/settings/profile']];
+        if(Yii::$app->user->identity->username=='admin'):
+        $menuItems[] = ['label' => 'Users', 'url' => ['/user/admin/index']];
+        endif;
         $menuItems[] = ['label' => 'Sign out (' . Yii::$app->user->identity->username . ')',
         'url' => ['/user/security/logout'],
         'linkOptions' => ['data-method' => 'post']];

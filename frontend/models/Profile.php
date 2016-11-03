@@ -23,6 +23,7 @@ use dektrium\user\models\Profile as BaseProfile;
  * @property string  $state
  * @property string  $zipcode
  * @property string  $phone
+ * @property string  $street
  * @property User    $user
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com
@@ -79,6 +80,7 @@ class Profile extends BaseProfile
             'stateLength'          => ['state', 'string', 'max' => 255],
             'zipcodeLength'        => ['zipcode', 'string', 'max' => 255],
             'phoneLength'          => ['phone', 'string', 'max' => 255],
+            'streetLength'         => ['street', 'string', 'max' => 255],
         ];
     }
 
@@ -101,6 +103,7 @@ class Profile extends BaseProfile
             'state'          => \Yii::t('user', 'State'),
             'zipcode'        => \Yii::t('user', 'Zip Code'),
             'phone'          => \Yii::t('user', 'Phone Number'),
+            'street'         => \Yii::t('user', 'Street'),
         ];
     }
 

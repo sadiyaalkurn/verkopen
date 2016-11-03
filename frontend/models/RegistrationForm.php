@@ -17,6 +17,8 @@ class RegistrationForm extends BaseRegistrationForm
     public $state;
     public $zipcode;
     public $phone;
+    public $street;
+    public $accept;
 
     /**
      * @inheritdoc
@@ -24,8 +26,10 @@ class RegistrationForm extends BaseRegistrationForm
     public function rules()
     {
         $rules = parent::rules();
-        $rules[] = [['fname','lname','city','state','zipcode','phone'], 'required'];
-        $rules[] = [['fname','lname','city','state','zipcode','phone'], 'string', 'max' => 255];
+        $rules[] = [['fname','lname','city','state','zipcode','phone', 'street'], 'required'];
+        $rules[] = [['fname','lname','city','state','zipcode','phone', 'street'], 'string', 'max' => 255];
+        $rules[] = [['accept'], 'required', 'requiredValue' => 1, 'message' => 'You need to agree to the Terms and Conditions before registration.'];
+        //$rules[] =  ['accept', 'required'];
         return $rules;
     }
 
@@ -35,11 +39,12 @@ class RegistrationForm extends BaseRegistrationForm
     public function attributeLabels()
     {
         $labels = parent::attributeLabels();
-        $labels['fname'] = \Yii::t('user', 'First Name');
-        $labels['lname'] = \Yii::t('user', 'Last Name');
-        $labels['city'] = \Yii::t('user', 'City');
-        $labels['state'] = \Yii::t('user', 'State');
-        $labels['phone'] = \Yii::t('user', 'Phone Number');
+        $labels['fname']    = \Yii::t('user', 'First Name');
+        $labels['lname']    = \Yii::t('user', 'Last Name');
+        $labels['city']     = \Yii::t('user', 'City');
+        $labels['state']    = \Yii::t('user', 'State');
+        $labels['phone']    = \Yii::t('user', 'Phone Number');
+        $labels['street']   = \Yii::t('user', 'Street');
         return $labels;
     }
 
@@ -63,6 +68,7 @@ class RegistrationForm extends BaseRegistrationForm
             'state' => $this->state,
             'zipcode' => $this->zipcode,
             'phone' => $this->phone,
+            'street' => $this->street,
         ]);
         $user->setProfile($profile);
     }

@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $model,
                     'login',
                     ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'form-control', 'tabindex' => '1']]
-                ) ?>
+                )->label('Username'); ?>
 
                 <?= $form
                     ->field(
