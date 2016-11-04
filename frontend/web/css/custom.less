@@ -409,7 +409,7 @@ nav.navbar.bootsnav{padding: 20px 0px 20px;}
 /*==== Login Register css Start  ===*/
 .login-section {
 	.full-width;
-	padding: 70px 0px;
+	padding: 60px 0px 120px;
 	background: @home-gift-bg url("../images/login-bg.jpg") no-repeat top center;
 	background-size: cover;
 	h2 {
@@ -419,44 +419,94 @@ nav.navbar.bootsnav{padding: 20px 0px 20px;}
 	}
 	p {
 		line-height: 30px;
-		color: @form-txt;
+		color: #a4a1a1;
 		font-size: 18px;
 		text-align: @mid-txt;
+		img{
+			margin-right: 10px;
+		}
 	}
 	a {
-		color: @btn-warning;
+		color: #a4a1a1;
+		&:hover{color:@btn-warning; text-decoration: none;}
 	}
 	.form-control{
-		border-radius: @radius-zero;
-		height: 40px;
-		margin-bottom: 30px;
+		border-radius: @radius-small;
+		height: 60px;
+		margin-bottom: 20px;
+		padding-left: 55px;
+		font-size: 17px;
 	}
+
 	.loginregistration{
 		margin: 120px auto 0px; 
-		padding: 50px;
+		padding: 0px 50px 50px;
 		color: #fff;
-		box-shadow: 0 0 5px #9e9e9e; 
-		border-radius: 5px;
+		border-radius: @radius-zero;
 		background: #ffffff;
+		border-top: @btn-warning 9px solid;
+		h3{
+			color: @btn-warning;
+			text-transform: @cap-txt;
+			font-size: 25px;
+			font-family: 'ProximaNovaRegular';
+			margin-top: 30px;
+		}
+		.user{
+			background: url(../images/icon-user.png) no-repeat 15px 15px;
+		}
+		.password{
+			background: url(../images/icon-password.png) no-repeat 15px 15px;
+		}
+		.email{
+			background: url(../images/icon-email.png) no-repeat 15px 21px;
+		}
+		.street{
+			background: url(../images/icon-street.png) no-repeat 15px 15px;
+		}
+		.city{
+			background: url(../images/icon-city.png) no-repeat 15px 15px;
+		}
+		.state{
+			background: url(../images/icon-state.png) no-repeat 15px 20px;
+		}
+		.zcode{
+			background: url(../images/icon-zcode.png) no-repeat 15px 20px;
+		}
+		.phone{
+			background: url(../images/icon-phone.png) no-repeat 15px 19px;
+		}
+		
+		.or{
+			width: 40px;
+			margin: -54px auto 30px;
+			color: #a4a1a1;
+			font-size: 18px;
+			background: #ffffff;
+			text-align: center;
+		}
+		.ch-box{color: @btn-warning; font-size: 15px;
+			label{font-weight: normal;}
+		/*input{float: left; margin: 4px 10px 0px 1px;}*/
+		}
 	}
 	.formicon{
-		margin: -105px auto 50px;
-		width: 110px;
+		margin: 0px -50px 50px 0px;
+		width: 61px;
+		float: right;
 	}
 	.btn-block{
-		border-radius: @radius-zero;
+		border-radius: @radius-small;
 		border: @border-zero;
 		font-size: 17px;
 		text-transform: uppercase;
 		color: @color-white;
-		color: @font-bold;
 		margin-top: 30px;
-		margin-bottom: 40px;
+		margin-bottom: 30px;
 		padding: 20px 0px;
-		font-weight: @font-bold;
 	}
 	.forgot{
-		color: @form-txt;
+		color: #a4a1a1;
 	}
 	hr{
 		margin: 40px 0px;

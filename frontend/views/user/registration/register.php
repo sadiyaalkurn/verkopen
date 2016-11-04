@@ -10,51 +10,70 @@ use yii\widgets\ActiveForm;
 
 $this->title = Yii::t('user', 'Sign up');
 $this->params['breadcrumbs'][] = $this->title;
+use yii\helpers\Url;
 ?>
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-            <h3 class="panel-title"><?= Html::encode($this->title) ?></h3>
-            </div>
-            <div class="panel-body">
-                <?php $form = ActiveForm::begin([
+<section class="login-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <!--  -->
+            <div class="loginregistration">
+              <div class="formicon">
+                <img src="<?php echo \yii\helpers\Url::to('images/register-icon.jpg', true);?>" alt="">
+              </div>
+              <h3>Register</h3>
+              <?php $form = ActiveForm::begin([
                     'id' => 'registration-form',
                 ]); ?>
-
-                <?= $form->field($model, 'fname')->label('First Name'); ?>
-
-                <?= $form->field($model, 'lname')->label('Last Name'); ?>
-
-                <?= $form->field($model, 'username') ?>
-
-                <?= $form->field($model, 'email') ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'zipcode')->label('Zip Code')->textInput(['id'=>'zip']); ?>
-                <div id="city_wrap">
-                <?= $form->field($model, 'city')->textInput(['id'=>'city']); ?>
+                <div class="form-group">
+                  <?= $form->field($model, 'fname', ['inputOptions' => ['class' => 'form-control user', 'placeholder'=>'First Name']])->label(false); ?>
+                </div>
+                <div class="form-group">
+                <?= $form->field($model, 'lname', ['inputOptions' => ['class' => 'form-control user', 'placeholder'=>'Last Name']])->label(false); ?>
+                </div>
+                <div class="form-group">
+                  <?= $form->field($model, 'email', ['inputOptions' => ['class' => 'form-control email', 'placeholder'=>'Email Address']])->label(false); ?>
+                </div>
+                <div class="form-group">
+                <?= $form->field($model, 'username', ['inputOptions' => ['class' => 'form-control user', 'placeholder'=>'Username']])->label(false); ?>
+                </div>
+                <div class="form-group">
+                  <?= $form->field($model, 'password', ['inputOptions' => ['class' => 'form-control password', 'placeholder'=>'Password']])->passwordInput()->label(false); ?>
+                </div>
+                <div class="form-group">
+                  <?= $form->field($model, 'zipcode', ['inputOptions' => ['class' => 'form-control zcode', 'placeholder'=>'Zip Code']])->label(false)->textInput(['id'=>'zip']); ?>
+                </div>
+                <div class="form-group">
+                  <?= $form->field($model, 'street', ['inputOptions' => ['class' => 'form-control street', 'placeholder'=>'Street']])->label(false); ?>
+                </div>
+                <div class="form-group">
+                  <div id="city_wrap">
+                  <?= $form->field($model, 'city', ['inputOptions' => ['class' => 'form-control city', 'placeholder'=>'City']])->textInput(['id'=>'city'])->label(false); ?>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <?= $form->field($model, 'state', ['inputOptions' => ['class' => 'form-control state', 'placeholder'=>'State']])->textInput(['id'=>'state'])->label(false); ?>
+                </div>
+                
+                <div>
+                  <?= $form->field($model, 'phone', ['inputOptions' => ['class' => 'form-control phone', 'placeholder'=>'Phone Number']])->label(false); ?>
                 </div>
 
-                <?= $form->field($model, 'state')->textInput(['id'=>'state']); ?>
-
-                <?= $form->field($model, 'street'); ?>
-
-                <?= $form->field($model, 'phone')->label('Phone Number'); ?>
+                <div class="form-group ch-box">
+                   <?= $form->field($model, 'accept')->checkbox(['label'=>'I Agree to the Terms and Conditions of the Website.']); ?>
+                </div>
                 
-                <?= $form->field($model, 'accept')->checkbox(['label'=>'I agree to the Terms and Conditions of the Website.']); ?>
-
-                <?= Html::submitButton(Yii::t('user', 'Sign up'), ['class' => 'btn btn-success btn-block']) ?>
-
-                <?php ActiveForm::end(); ?>
+                <div class="submit">
+                  <?= Html::submitButton(Yii::t('user', 'Sign up'), ['class' => 'btn btn-warning btn-block']) ?>
+                  <p>Already have an account? <a href="<?= Url::to(['/user/security/login'])?>">Login</a></p>
+                </div>
+              <?php ActiveForm::end(); ?>
             </div>
+            <!--  -->
+          </div>
         </div>
-        <p class="text-center">
-            <?= Html::a(Yii::t('user', 'Already registered? Sign in!'), ['/user/security/login']) ?>
-        </p>
-    </div>
-</div>
+      </div>
+    </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.0/jquery.js"></script>
 <script>
 $(document).ready(function(){

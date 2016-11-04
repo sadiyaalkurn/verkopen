@@ -64,10 +64,7 @@ use yii\helpers\Url;
       </div>   
     </nav>
     <!-- End Navigation -->
-    <?php
-    NavBar::begin();
-    NavBar::end();
-    ?>
+    
     <?php //Breadcrumbs::widget([ 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [], ]) ?>
     <?= Alert::widget() ?>
     <?= $content ?>
@@ -141,6 +138,7 @@ use yii\helpers\Url;
     </footer>
     <!-- Footer End  -->
 <?php $this->endBody() ?>
+
 <script type="text/javascript">
   new WOW().init();
   $(document).ready(function() {

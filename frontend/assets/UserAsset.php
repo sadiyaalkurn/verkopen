@@ -21,6 +21,7 @@ class UserAsset extends AssetBundle
     public $js = [
         'js/bootsnav.js',
         'js/wow.min.js',
+        'js/bootstrap.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -57,23 +57,65 @@ use yii\helpers\Url;
             <ul class="nav navbar-nav navbar-center" data-in="fadeInDown" data-out="fadeOutUp">
                 <li><a href="<?php echo Yii::$app->homeUrl; ?>">Home</a></li>
                 <li><a href="<?= Url::to(['/site/about'])?>">About Us</a></li>
-                <li><a href="#">Our Services</a></li>
-                <li><a href="#">Our Partners</a></li>
+                <li><a href="<?= Url::to(['/site/our-services'])?>">Our Services</a></li>
+                <li><a href="<?= Url::to(['/site/our-partners'])?>">Our Partners</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
       </div>   
     </nav>
     <!-- End Navigation -->
-    <?php
-    NavBar::begin();
-    NavBar::end();
-    ?>
     <?php //Breadcrumbs::widget([ 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [], ]) ?>
     <?= Alert::widget() ?>
     <?= $content ?>
 
     <!-- Footer Start  -->
     <footer id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4 f-contact">
+            <h3>Contact us</h3>
+            <p><span>+</span>90 555 999 77 44 , <span>+</span>90 505 959 75 24 </p>
+          </div>
+          <div class="col-sm-4 f-contact">
+            <h3>Address</h3>
+            <p>1 Infinite Loop Cupertino , CA 95014 United States </p>
+          </div>
+          <div class="col-sm-4 f-contact">
+            <h3>Keep In Touch</h3>
+            <p><a href="mailto:info@vekropen.nl" target="_top">info@vekropen.nl</a></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="newsletter">
+            <div class="col-sm-8">
+              <div class="row">
+                <div class="col-sm-2">
+                  <label>Newsletter</label>
+                </div>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                     <input type="text" class="form-control" placeholder="Enter Your Email Addres">
+                     <span class="input-group-btn">
+                          <button class="btn btn-default" type="button">Submit</button>
+                     </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-sm-4">
+              <div class="f-social">
+                <a href="#" target="_blank" class="wow bounceIn"><img src="<?php echo \yii\helpers\Url::to('images/icon-fb.png', true);?>" alt="Facebook"></a>
+                <a href="#" target="_blank" class="wow bounceIn"><img src="<?php echo \yii\helpers\Url::to('images/icon-twitter.png', true);?>" alt="Twitter"></a>
+                <a href="#" target="_blank" class="wow bounceIn"><img src="<?php echo \yii\helpers\Url::to('images/icon-insta.png', true);?>" alt="Instagram"></a>
+                <a href="#" target="_blank" class="wow bounceIn"><img src="<?php echo \yii\helpers\Url::to('images/icon-youtube.png', true);?>" alt="Youtube"></a>
+                <a href="#" target="_blank" class="wow bounceIn"><img src="<?php echo \yii\helpers\Url::to('images/icon-linked.png', true);?>" alt="LinkedIn"></a>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
       <div class="copyright">
         <div class="container">
           <div class="row">

@@ -43,6 +43,43 @@ body {
     margin-bottom: 0 !important;
 }*/
 
+.auth-clients {
+    display: block !important;
+    margin: 0 0 0 !important;
+    list-style: none !important;
+    overflow: auto !important;
+}
+
+.auth-clients li {
+    float: none !important;
+    display: block !important;
+    margin: 10px 2.5em 0 0 !important;
+    text-align: center !important;
+}
+
+.auth-icon {
+    display: block !important;
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 0 !important;
+    margin: 0 auto !important;
+}
+
+.auth-icon.facebook {
+    background: url(../images/fb-icon-01.png) no-repeat !important;
+    background-position: top !important;;
+}
+
+.auth-icon.google {
+    background: url(../images/gp-icon-01.png) no-repeat !important;
+    background-position: top !important;;
+}
+
+
+.alert {
+    margin-top: 100px;
+}
+
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
     position: relative;

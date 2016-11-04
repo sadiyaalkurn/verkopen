@@ -143,6 +143,26 @@ class SiteController extends Controller
     }
 
     /**
+     * Displays Our Partners page.
+     *
+     * @return mixed
+     */
+    public function actionOurPartners()
+    {
+        return $this->render('our-partners');
+    }
+
+    /**
+     * Displays Our Services page.
+     *
+     * @return mixed
+     */
+    public function actionOurServices()
+    {
+        return $this->render('our-services');
+    }
+
+    /**
      * Signs user up.
      *
      * @return mixed

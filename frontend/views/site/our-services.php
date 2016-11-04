@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'About';
+$this->title = 'Our Services';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="login-section">
