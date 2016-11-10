@@ -60,7 +60,24 @@ use yii\helpers\Url;
                 </div>
 
                 <div class="form-group ch-box">
-                   <?= $form->field($model, 'accept')->checkbox(['label'=>'I Agree to the Terms and Conditions of the Website.']); ?>
+                    <div id="myModal" class="modal">
+
+                      <!-- Modal content -->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <span class="close">×</span>
+                          <h2 style="padding-top:0 !important; font-size:25px">Terms and Conditions</h2>
+                        </div>
+                        <div class="modal-body">
+                          <p style="line-height: 30px; color: #000; font-size: 15px; text-align: left;">Nullam ut lacus mauris. Maecenas nec dignissim urna. Vestibulum sit amet nulla sed diam venenatis vehicula. Sed mattis, lacus a porttitor pellentesque, nisi lorem lobortis nisi, eget pretium nisl ante a purus. Nullam eu eros egestas neque pulvinar lobortis at eget metus. Cras pretium mauris at velit condimentum, elementum laoreet ligula mollis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin sit amet volutpat mi. Sed eu suscipit ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam pretium tincidunt nulla, eget malesuada velit iaculis eget. Cras sed dolor ligula. Cras a finibus tellus. Duis pellentesque iaculis faucibus.
+<br /><br />
+Sed et ultrices felis. Nam eget consequat metus, nec elementum diam. Curabitur mollis nec lacus id placerat. Duis non quam commodo, ullamcorper dui sit amet, vulputate lectus. Vivamus efficitur convallis posuere. Sed rutrum accumsan eros id porttitor. Nam dictum ut orci a ultricies. Vestibulum libero augue, vestibulum facilisis nulla ut, vestibulum molestie felis. Nam lacinia pulvinar ex ac auctor. Proin feugiat lectus sed turpis fermentum, ac elementum arcu porta. Duis scelerisque justo eu massa tempor, nec tincidunt orci venenatis. Nam feugiat vulputate ullamcorper.</p>
+                        </div>
+                      </div>
+
+                    </div>
+                    I Agree to the <a id="myBtn" style="cursor: pointer;">Terms and Conditions</a> of the Website.
+                   <?= $form->field($model, 'accept')->checkbox(['label'=>false]); ?>
                 </div>
                 
                 <div class="submit">
@@ -126,4 +143,32 @@ $('#zip').keyup(function(){
   //}
 });
 });
+</script>
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 </script>

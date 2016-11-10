@@ -21,6 +21,16 @@ body {
     padding-top: 20px;
 }
 
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+        color: #fff;
+    background-color: #dd4b39;
+    border-color: #dd4b39;
+}
+
+div#w0 a {
+    color: #dd4b39;
+}
+
 .jumbotron {
     text-align: center;
     background-color: transparent;

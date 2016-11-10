@@ -72,9 +72,23 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $this->layout = '@app/views/layouts/home';
+        //$this->layout = '@app/views/layouts/home';
         return $this->render('index');
     }
+
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionPostAd()
+    {   
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/user/login');
+        }
+        return $this->render('post-ad');
+    }
+
 
     /**
      * Logs in a user.

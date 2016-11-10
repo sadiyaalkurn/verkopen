@@ -130,6 +130,8 @@ class RegistrationController extends Controller
                 'title'  => \Yii::t('user', 'Your account has been created'),
                 'module' => $this->module,
             ]);
+        } else {
+            print_r($model->error);
         }
 
         return $this->render('register', [

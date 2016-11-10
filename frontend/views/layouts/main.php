@@ -36,9 +36,14 @@ use yii\helpers\Url;
         <!-- Start Atribute Navigation -->
         <div class="attr-nav">
             <ul>
-              <li class="wishlist"><a href="#" class="btn btn-warning radius-0"><img src="<?php echo \yii\helpers\Url::to('images/icon-post.png', true);?>" alt=""> Post Your Ad</a></li>
+              <li class="wishlist"><a href="<?= Url::to(['/site/post-ad'])?>" class="btn btn-warning radius-0"><img src="<?php echo \yii\helpers\Url::to('images/icon-post.png', true);?>" alt=""> Post Your Ad</a></li>
+              <?php if (Yii::$app->user->isGuest) { ?>
               <li><a href="<?= Url::to(['/user/security/login'])?>">Login</a></li>
               <li><a href="<?= Url::to(['/user/registration/register'])?>">Register</a></li>
+              <?php } else { ?>
+              <li><a href="<?= Url::to(['/user/settings/profile'])?>">Profile</a></li>
+              <li><?= Html::a('Logout', ['/site/logout'], ['data' => ['method' => 'post']]) ?></li>
+              <?php } ?>
             </ul>
         </div>
         <!-- End Atribute Navigation -->
@@ -124,10 +129,10 @@ use yii\helpers\Url;
             </div>
             <div class="col-sm-6">
               <div class="f-link">
-                <a href="#">Home</a> |
-                <a href="#">About Us</a> |
-                <a href="#">Our Services</a> |
-                <a href="#">Our Partners</a>
+                <a href="<?php echo Yii::$app->homeUrl; ?>">Home</a> |
+                <a href="<?= Url::to(['/site/about'])?>">About Us</a> |
+                <a href="<?= Url::to(['/site/our-services'])?>">Our Services</a> |
+                <a href="<?= Url::to(['/site/our-partners'])?>">Our Partners</a>
               </div>
             </div>
           </div>

@@ -40,5 +40,17 @@ return [
             'encryption' => 'tls',
             ],
         ],
+        'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'site/index',
+            'user/login',
+            'site/about',
+            'site/our-services',
+            'site/our-partners',
+            'user/register',
+            'debug/*'
+        ]
+    ]
     ],
 ];
