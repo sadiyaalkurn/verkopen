@@ -30,6 +30,9 @@ return [
         'testimonials' => [
             'class' => 'backend\modules\testimonials\Module',
         ],
+        'ourpartners' => [
+            'class' => 'backend\modules\ourpartners\Module',
+        ]
     ],
     'homeUrl' => '/admin',
     'components' => [

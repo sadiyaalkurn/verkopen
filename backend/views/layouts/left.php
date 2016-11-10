@@ -31,8 +31,9 @@
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'User Management', 'icon' => 'fa fa-file-code-o', 'url' => ['/admin']],
-                    ['label' => 'Testimonials', 'icon' => 'fa fa-file-code-o', 'url' => ['/testimonials']],
+                    ['label' => 'User Management', 'icon' => 'fa fa-users', 'url' => ['/admin']],
+                    ['label' => 'Testimonials', 'icon' => 'fa fa-comments', 'url' => ['/testimonials']],
+                    ['label' => 'Our Partners', 'icon' => 'fa fa-globe', 'url' => ['/ourpartners']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'Same tools',

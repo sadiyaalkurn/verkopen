@@ -30,7 +30,8 @@
         "bower-asset/select2": "*",
         "bower-asset/bootstrap3-dialog": "*",
         "bower-asset/jquery-ui-layout-min": "*",
-        "2amigos/yii2-ckeditor-widget": "~1.0"
+        "2amigos/yii2-ckeditor-widget": "~1.0",
+        "kartik-v/yii2-widget-fileinput": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
