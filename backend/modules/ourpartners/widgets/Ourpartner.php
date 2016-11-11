@@ -1,19 +1,19 @@
 <?php
-namespace backend\modules\testimonials\widgets;
+namespace backend\modules\ourpartners\widgets;
 
 use yii\base\Widget;
-use backend\modules\testimonials\models\Testimonials;
+use backend\modules\ourpartners\models\Ourpartners;
 use yii\db\Query;
 
 
-class Testimonial extends Widget
+class Ourpartner extends Widget
 {
 
 
     public function run()
     {
-        $data = Testimonials::find()->asArray()->All();
-        return $this->render('testimonials', [
+        $data = Ourpartners::find()->asArray()->All();
+        return $this->render('ourpartner', [
             'data' => $data
         ]);
     }

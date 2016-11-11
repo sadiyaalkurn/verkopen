@@ -70,7 +70,12 @@ return [
 
             ],
         ],
-        
+        'urlManagerFrontEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
     ],
     'params' => $params,
 ];

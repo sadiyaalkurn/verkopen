@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 use yii\base\Widget;
 use backend\modules\testimonials\widgets\Testimonial;
+use backend\modules\ourpartners\widgets\Ourpartner;
 $this->title = 'Verkopen.nl';
 ?>
 
@@ -74,47 +75,7 @@ $this->title = 'Verkopen.nl';
     <!-- End Welcome text  -->
 
     <!-- Start our partner  -->
-    <div class="our-partners">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <h2>Our Partners</h2>
-            <div class="row">
-              <div class="col-sm-20 wow bounceIn">
-                <a href="#"><img src="images/partner-logo-01.jpg" class="partner-logo" alt=""></a>
-              </div>
-              <div class="col-sm-20 wow bounceIn">
-                <a href="#"><img src="images/partner-logo-02.jpg" class="partner-logo" alt=""></a>
-              </div>
-              <div class="col-sm-20 wow bounceIn">
-                <a href="#"><img src="images/partner-logo-03.jpg" class="partner-logo" alt=""></a>
-              </div>
-              <div class="col-sm-20 wow bounceIn">
-                <a href="#"><img src="images/partner-logo-04.jpg" class="partner-logo" alt=""></a>
-              </div>
-              <div class="col-sm-20 wow bounceIn">
-                <a href="#"><img src="images/partner-logo-05.jpg" class="partner-logo" alt=""></a>
-              </div>
-              <div class="col-sm-20 wow bounceIn">
-                <a href="#"><img src="images/partner-logo-06.jpg" class="partner-logo" alt=""></a>
-              </div>
-              <div class="col-sm-20 wow bounceIn">
-                <a href="#"><img src="images/partner-logo-07.jpg" class="partner-logo" alt=""></a>
-              </div>
-              <div class="col-sm-20 wow bounceIn">
-                <a href="#"><img src="images/partner-logo-08.jpg" class="partner-logo" alt=""></a>
-              </div>
-              <div class="col-sm-20 wow bounceIn">
-                <a href="#"><img src="images/partner-logo-09.jpg" class="partner-logo" alt=""></a>
-              </div>
-              <div class="col-sm-20 wow bounceIn">
-                <a href="#"><img src="images/partner-logo-10.jpg" class="partner-logo" alt=""></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <?php echo Ourpartner::widget(); ?>
     <!-- End our-partner  -->
 
     <!-- Start How it work  -->
@@ -147,8 +108,6 @@ $this->title = 'Verkopen.nl';
     <!-- End How it work  -->
 
     <!-- Start testimonial  -->
-    
-              <?php echo Testimonial::widget(); ?>
-            
+    <?php echo Testimonial::widget(); ?>
     <!-- End testimonial  -->
     

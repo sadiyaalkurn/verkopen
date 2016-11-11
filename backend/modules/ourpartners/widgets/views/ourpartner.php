@@ -1,19 +1,22 @@
-<?php if($data) { ?>
-    <div class="home-testimonial">
+<?php 
+use yii\helpers\Url;
+if($data) { 
+$path = Url::home(true)."/backend/web/uploads/ourpartners/";
+?>
+  <div class="our-partners">
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <img src="images/quote.png" alt="" class="quote ">
-            <div class="owl-carousel owl-theme wow fadeIn" id="testimonial-carousel">
-            <?php foreach ($data as $key => $value)  { ?>
-            <div class="items">
-                <p><?php echo $value['text'];?></p>
-                <h4>-<?php echo $value['by'];?></h4>
+            <h2>Our Partners</h2>
+            <div class="row">
+              <?php foreach ($data as $key => $value)  { ?>
+              <div class="col-sm-20 wow bounceIn">
+                <img src="<?php echo $path.$value['file'];?>" class="partner-logo" alt="<?php echo $value['title'];?>" title="<?php echo $value['title'];?>">
+              </div>
+              <?php } ?>
             </div>
-            <?php } ?>
-            </div>            
           </div>
         </div>
       </div>
-    </div>
+  </div>
 <?php } ?>

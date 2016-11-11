@@ -2,20 +2,24 @@
 	use yii\helpers\Html;
 	use yii\widgets\ActiveForm;
 	use kartik\file\FileInput;
-
-	$form = ActiveForm::begin(['id' => 'create-data-form', 'action' => '']);
 ?>
-	<div class="fomr-group">
+
+<?php
+$form = ActiveForm::begin(['action' => '', 'id' => 'create-data-form', 'options' => ['enctype' => 'multipart/form-data']]); ?>
+	
+	<div class="form-group">
 		<label for="url">Partner Title</label>
 		<?php echo $form->field($ourpartners, 'title')->textInput(['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Partner Title'])->label(false); ?>
 	</div>
-	<div class="fomr-group">
+
+	<div class="form-group">
 		<?php
-		echo $form->field($ourpartners, 'file')->widget(FileInput::classname(), [
-		    'options' => ['accept' => 'image/*'],
-		]);
+		echo $form->field($ourpartners, 'file')->widget(FileInput::classname(), [ 'options' => ['accept' => 'image/*'],]);
 		?>
 	</div>
-<?php
-	ActiveForm::end();
-?>
+
+	<div class="form-group">
+            <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
+    </div>
+
+<?php ActiveForm::end(); ?>

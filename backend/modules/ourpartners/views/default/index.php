@@ -19,7 +19,14 @@ $this->title = "Our Partners";
         'dataProvider' => $dataProvider,
         'columns' => [
 
-            //'text',
+            array(
+                    'label' => 'Logo',
+                    'format' => 'html',
+                    'value'=>function($model) {
+                $path = Yii::$app->urlManagerFrontEnd->createUrl('/backend/web/uploads/ourpartners', true);
+                        return Html::img($path.'/'.$model->file);
+                    },
+                       ),
             'title',
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -78,36 +85,6 @@ $('.create_data').on('click', function(event){
             label: 'Close',
             action: function(dialog) {
                 dialog.close()
-            }
-        }, {
-            label: 'Save',
-            'cssClass': 'btn btn-primary',
-            action: function(dialog) {
-                var formData = $('#create-data-form').serializeArray();
-                console.log(formData)
-                
-                $.ajax({
-                    url: $('#create-data-form').attr('action'),
-                    data: formData,
-                    type: 'post',
-                    success: function(response) {
-                        var resp = JSON.parse(response);
-                        if(!resp.flag) {
-                            if(typeof resp.message == "string") {
-                                alert(resp.message);
-                            } else {
-                                $.each(resp.message, function(i, v){
-                                    $('#' + i + '_error').addClass('text-danger').text(v);
-                                });
-                            }
-                            
-                        } else {
-                            alert(resp.message);
-                            dialog.close();
-                            location.reload();
-                        }
-                    },
-                });
             }
         }]
     });
