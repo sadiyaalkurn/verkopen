@@ -36,7 +36,7 @@ use yii\helpers\Url;
         <!-- Start Atribute Navigation -->
         <div class="attr-nav">
             <ul>
-              <li class="wishlist"><a href="<?= Url::to(['/site/post-ad'])?>" class="btn btn-warning radius-0"><img src="<?php echo \yii\helpers\Url::to('images/icon-post.png', true);?>" alt=""> Post Your Ad</a></li>
+              <li class="wishlist"><a href="<?= Url::to(['/user/post-ad'])?>" class="btn btn-warning radius-0"><img src="<?php echo \yii\helpers\Url::to('images/icon-post.png', true);?>" alt=""> Post Your Ad</a></li>
               <?php if (Yii::$app->user->isGuest) { ?>
               <li><a href="<?= Url::to(['/user/security/login'])?>">Login</a></li>
               <li><a href="<?= Url::to(['/user/registration/register'])?>">Register</a></li>
@@ -66,7 +66,7 @@ use yii\helpers\Url;
                 <li><a href="<?= Url::to(['/site/our-partners'])?>">Our Partners</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
-      </div>   
+      </div>
     </nav>
     <!-- End Navigation -->
     <?php //Breadcrumbs::widget([ 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [], ]) ?>

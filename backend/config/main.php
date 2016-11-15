@@ -32,6 +32,9 @@ return [
         ],
         'ourpartners' => [
             'class' => 'backend\modules\ourpartners\Module',
+        ],
+        'categories' => [
+            'class' => 'backend\modules\categories\Module',
         ]
     ],
     'homeUrl' => '/admin',

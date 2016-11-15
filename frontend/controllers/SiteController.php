@@ -76,18 +76,7 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return mixed
-     */
-    public function actionPostAd()
-    {   
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect('/user/login');
-        }
-        return $this->render('post-ad');
-    }
+    
 
 
     /**

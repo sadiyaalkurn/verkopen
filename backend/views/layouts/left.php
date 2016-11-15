@@ -34,6 +34,7 @@
                     ['label' => 'User Management', 'icon' => 'fa fa-users', 'url' => ['/admin']],
                     ['label' => 'Testimonials', 'icon' => 'fa fa-comments', 'url' => ['/testimonials']],
                     ['label' => 'Our Partners', 'icon' => 'fa fa-globe', 'url' => ['/ourpartners']],
+                    ['label' => 'Categories', 'icon' => 'fa fa-files-o', 'url' => ['/categories']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'Same tools',

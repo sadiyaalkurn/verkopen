@@ -49,5 +49,10 @@ return [
             ],
         ],
     ],
+    'modules' => [
+        'postad' => [
+            'class' => 'frontend\modules\postad\Module',
+        ],
+    ],
     'params' => $params,
 ];

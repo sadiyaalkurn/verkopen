@@ -36,6 +36,25 @@ body {
     font-style: italic;
 }
 
+#banner-inner {
+    width: 100%;
+    height: 550px;
+    background: url(../images/about-us-verkopen.jpg) no-repeat;
+    background-position: top;
+}
+
+.content-area {
+    width: 100%;
+    float: left;
+    position: relative;
+    padding: 60px 0 120px;
+    background: #eee;
+}
+
+.content-area h3 {
+    text-align: center;
+}
+
 /*nav#w0.navbar-default, nav#w1.navbar-default {
     background: none !important;
     border: 0 !important;
