@@ -1,10 +1,10 @@
 <h2>Add Description</h2>
 <div class="row field-row">
 <div class="col-sm-3">
-  <label>Select Category</label>
+  <label>Selected Category</label>
 </div>
 <div class="col-sm-5">
-  <span>Audio, TV, Tape Recorder</span>
+  <span><?php echo ucwords($cname);?></span>
 </div>
 </div>
 

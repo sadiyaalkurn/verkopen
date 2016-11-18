@@ -3,83 +3,82 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 frontend\assets\DropifyAsset::register($this);
+use kartik\depdrop\DepDrop;
+use kartik\typeahead\TypeaheadBasic;
+use kartik\typeahead\Typeahead;
 
 $this->title = "Post Your Ad";
 ?>
-    <div class="add-desc-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12 wow fadeIn">
-            <!-- Form start -->
-            <?php $form = ActiveForm::begin([
-                    'id' => 'post-ad',
-                    'options' => [
-                        'enctype' => 'multipart/form-data'
+<div class="add-desc-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 wow fadeIn">
+        <!-- Form start -->
+        <?php $form = ActiveForm::begin([
+                'id' => 'post-ad',
+                'options' => [
+                    'enctype' => 'multipart/form-data'
+                ]
+            ]); ?>
+        <h2>Choose Your Category</h2>
+        <?php
+            echo Typeahead::widget([
+            'name' => 'search_subcat_id',
+            'options' => ['placeholder' => 'Filter as you type ...', 'id'=>'subcat_id'],
+            'pluginOptions' => ['highlight'=>true],
+            'dataset' => [
+                [
+                    'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
+                    'display' => 'value',
+                    //'prefetch' => '/samples/countries.json',
+                    'remote' => [
+                        'url' => Url::to(['default/category-list']) . '?q=%QUERY',
+                        'wildcard' => '%QUERY'
                     ]
-                ]); ?>
+                ]
+            ]
+        ]);
+        ?>
+        <h2>Specify Ad</h2>
+        <div>
+            <div style="float: left; width: 50%; padding: 10px 0">
+                <label>Choose Category<span class="red_text"> (*)</span></label>
                 <?php
-                $wizard_config = [
-                    'id' => 'stepwizard',
-                    'steps' => [
-                        1 => [
-                            'title' => 'Select Category',
-                            'icon' => 'glyphicon glyphicon-tags',
-                            'content' => $this->render('steps/_select_category', ['model' => $model, 'form' => $form, 'catList'=>$catList]),
-                            'buttons' => [
-                                'next' => [
-                                    'title' => 'Next',
-                                    'options' => [
-                                        'class' => 'btn btn-warning btn-block'
-                                    ],
-                                ],
-                            ],
-                        ],
-                        2 => [
-                            'title' => 'Add Description',
-                            'icon' => 'glyphicon glyphicon-list-alt',
-                            'content' => $this->render('steps/_add_description', ['model' => $model, 'form' => $form, 'info'=>$info]),
-                                'next' => [
-                                        'title' => 'Next',
-                                        'options' => [
-                                            'class' => 'btn btn-warning btn-block'
-                                        ],
-                                    ],
-                        ],
-                        3 => [
-                            'title' => 'Choose ad Sites',
-                            'icon' => 'glyphicon glyphicon-th-list',
-                            'content' => $this->render('steps/_choose_platforms', ['model' => $model, 'form' => $form]),
-                            'buttons' => [
-                                'save' => [
-                                    'title' => 'Complete',
-                                    'options' => [
-                                        'class' => 'btn btn-warning btn-block',
-                                        'type' => 'submit'
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                //'complete_content' => "You are done!", // Optional final screen
-                ];
+                echo $form->field($model, 'category_id')->dropDownList($catList, ['id'=>'cat-id', 'size'=>'12', 'class'=>'category_select'])->label(false);
                 ?>
-                <div class="row field-row">
-                    <div class="col-sm-12">
-                        <!--<div class="center-icon-image">
-                            <p class="re-text">Please fill the following fields to Post Ad:</p>
-                        </div>-->
-                        <?= \drsdre\wizardwidget\WizardWidget::widget($wizard_config); ?>
-                    </div>
-                </div>
-
-                <?php ActiveForm::end(); ?>
-          </div>
+            </div>
+            <div style="float: left; width: 50%; padding: 10px 0 0 10px">
+                <label>Choose Sub Category<span class="red_text"> (*)</span></label>
+                <?php                 
+                echo $form->field($model, 'subcat_id')->widget(DepDrop::classname(), [
+                    'options'=>['id'=>'subcat-id', 'size'=>'12', 'class'=>'category_select'],
+                    'pluginOptions'=>[
+                        'depends'=>['cat-id'],
+                        'placeholder'=>'Select...',
+                        'url'=>Url::to(['/postad/default/subcategories'])
+                    ]
+                ])->label(false);
+                ?>
+            </div>
         </div>
+        <div style="clear: both;"></div>
+        <?= Html::submitButton('Next', ['class' => 'btn btn-warning', 'id'=>'next_step']) ?>
+        <?php ActiveForm::end(); ?>
       </div>
     </div>
-<?php 
+  </div>
+</div>
+<?php
 $this->registerJs( <<< EOT_JS_CODE
-$('.dropify').dropify();
+$(function() {
+    $('#next_step').hide();
+    $('#subcat_id').blur(function(){
+        $('#next_step').show(); 
+    });
+    $('#subcat-id').blur(function(){
+        $('#subcat_id').val('');
+        $('#next_step').show();
+    });
+});
 EOT_JS_CODE
 );
-?>

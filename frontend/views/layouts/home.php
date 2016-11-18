@@ -126,7 +126,7 @@ use yii\helpers\Url;
         <div class="container">
           <div class="row">
             <div class="col-sm-6">
-              <p>© 2016, By Vekropen.nl. All rights reserved. Designed by <a href="#">Alkurn Technologies</a>.</p>
+              <p>© 2016, By Verkopen.nl. All rights reserved. Designed by <a href="#">Alkurn Technologies</a>.</p>
             </div>
             <div class="col-sm-6">
               <div class="f-link">

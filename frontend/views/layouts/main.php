@@ -36,7 +36,7 @@ use yii\helpers\Url;
         <!-- Start Atribute Navigation -->
         <div class="attr-nav">
             <ul>
-              <li class="wishlist"><a href="<?= Url::to(['/user/post-ad'])?>" class="btn btn-warning radius-0"><img src="<?php echo \yii\helpers\Url::to('images/icon-post.png', true);?>" alt=""> Post Your Ad</a></li>
+              <li class="wishlist"><a href="<?= Url::to(['/postad'])?>" class="btn btn-warning radius-0"><img src="<?php echo \yii\helpers\Url::to('images/icon-post.png', true);?>" alt=""> Post Your Ad</a></li>
               <?php if (Yii::$app->user->isGuest) { ?>
               <li><a href="<?= Url::to(['/user/security/login'])?>">Login</a></li>
               <li><a href="<?= Url::to(['/user/registration/register'])?>">Register</a></li>
@@ -87,7 +87,7 @@ use yii\helpers\Url;
           </div>
           <div class="col-sm-4 f-contact">
             <h3>Keep In Touch</h3>
-            <p><a href="mailto:info@vekropen.nl" target="_top">info@vekropen.nl</a></p>
+            <p><a href="mailto:info@vekropen.nl" target="_top">info@verkopen.nl</a></p>
           </div>
         </div>
         <div class="row">
@@ -125,7 +125,7 @@ use yii\helpers\Url;
         <div class="container">
           <div class="row">
             <div class="col-sm-6">
-              <p>© 2016, By Vekropen.nl. All rights reserved. Designed by <a href="#">Alkurn Technologies</a>.</p>
+              <p>© 2016, By Verkopen.nl. All rights reserved. Designed by <a href="#">Alkurn Technologies</a>.</p>
             </div>
             <div class="col-sm-6">
               <div class="f-link">

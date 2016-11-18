@@ -4,7 +4,6 @@ use yii\helpers\Html;
 /* @var $this \yii\web\View */
 /* @var $content string */
 ?>
-
 <header class="main-header">
 
     <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">Verkopen.nl Admin</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>

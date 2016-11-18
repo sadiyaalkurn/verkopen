@@ -41,6 +41,7 @@ class PostAd extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['title', 'delivery', 'characterstics','files', 'text', 'website', 'youtube', 'type'], 'required'],
             [['user_id', 'category_id'], 'integer'],
             [['files', 'text', 'website', 'youtube'], 'string'],
             [['type_of_ad', 'type', 'show_location_map', 'price'], 'string', 'max' => 45],
