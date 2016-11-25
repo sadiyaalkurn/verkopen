@@ -8,7 +8,7 @@ use yii\helpers\Url;
 BootstrapPluginAsset::register($this);
 BootstrapDialogAsset::register($this);
 
-$this->title = $cname->Name." : SubCategories";
+$this->title = $cname->name." : SubCategories";
 ?>
 <div class="content-type-index">
 	<p>
@@ -20,7 +20,7 @@ $this->title = $cname->Name." : SubCategories";
         'columns' => [
 
             //'text',
-            'Name',
+            'name',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template'=>'{update} {delete}',
@@ -29,7 +29,7 @@ $this->title = $cname->Name." : SubCategories";
                         return Html::a('<span class="fa fa-trash"></span>', $url, [
                             'title' => Yii::t('app', 'Delete'),
                             'class' => 'btn delete btn-xs',
-                            'id' => $model->id
+                            'id' => $model->uid
                         ]);
                     },
                     'update' => function( $url, $model ) {
@@ -41,10 +41,10 @@ $this->title = $cname->Name." : SubCategories";
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
                     if ( $action === "update" ) {
-                        $url = Yii::$app->urlManager->createUrl(['/categories/default/update','id'=>$model->id]);
+                        $url = Yii::$app->urlManager->createUrl(['/categories/default/update','id'=>$model->uid]);
                         return $url;
                     } elseif($action === 'delete'){
-                        $url = Yii::$app->urlManager->createUrl(['/categories/default/delete','id'=>$model->id]);
+                        $url = Yii::$app->urlManager->createUrl(['/categories/default/delete','id'=>$model->uid]);
                         return $url;
                     }
                 }

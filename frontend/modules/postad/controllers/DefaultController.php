@@ -20,17 +20,35 @@ class DefaultController extends Controller
      * Renders the index view for the module
      * @return string
      */
-    /*public function actionIndex()
+    public function actionSearch()
     {
     	if (Yii::$app->user->isGuest) {
             return $this->redirect('user/login');
         }
-    	$model = new PostAd();
-    	$info = new PostAdContactInfo();
-    	$Categories = Categories::find()->where(['SubCategoryID'=>0])->all();
-    	$catList=ArrayHelper::map($Categories,'CategoryID','Name');
-        return $this->render('index', ['model'=>$model, 'info'=>$info, 'catList'=>$catList]);
-    }*/
+        $q = Yii::$app->request->post('title');
+	    $query = new Query;
+	    $query->select('*')
+	        ->from('categories')
+	        ->where('name LIKE "%' . $q .'%"')
+	        ->andwhere('parent != 0')
+	        ->limit(10)
+	        ->orderBy('name');
+	    $command = $query->createCommand();
+	    $data = $command->queryAll();
+	    $out = [];
+	    foreach ($data as $d) {
+	        $maincat = Categories::find()->where(['uid'=>$d['parent']])->one();
+	        $cname = $maincat['name'];
+	        $subcat = Categories::find()->where(['uid'=>$maincat['parent']])->one();
+	        if(!empty($subcat)){
+	        	$sname = $subcat['name'];
+	        } else {
+	        	$sname = "";
+	        }
+	        $out[] = ['value' => $d['name'],'id' => $d['uid'],'cname' => $cname,'sname' => $sname,'cid'=>$maincat['uid'],'sid'=>$subcat['uid']];
+	    }
+	    echo Json::encode($out);
+    }
 
     /**
      * Renders the category view for the module
@@ -43,23 +61,38 @@ class DefaultController extends Controller
         }
     	$model = new PostAd();
     	$info = new PostAdContactInfo();
-    	$Categories = Categories::find()->where(['SubCategoryID'=>0])->all();
-    	$catList=ArrayHelper::map($Categories,'CategoryID','Name');
+    	$Categories = Categories::find()->where(['parent'=>0])->orderBy(['name' => SORT_ASC])->all();
+    	$catList=ArrayHelper::map($Categories,'uid','name');
 
     	if(Yii::$app->request->isPost){
     		$post = Yii::$app->request->post();
-    		if(!empty($post['search_subcat_id'])) {
-    			$cat_id = Categories::find()->where(['Name'=>$post['search_subcat_id']])->one();
-    			$category_id = $cat_id['CategoryID'];
-    			$subcat_id = $cat_id['SubCategoryID'];	
+    		if(empty($post['PostAd'])) {
+    			$category_id = $post['category_id'];
+    			$subcat_id = $post['subcat_id'];
+    			$subsubcat_id = $post['subsubcat_id'];
     		} else {
     			$category_id = $post['PostAd']['category_id'];
-    			$subcat_id = $post['PostAd']['subcat_id'];	
+    			$subcat_id = $post['PostAd']['subcat_id'];
+    			$subsubcat_id = $post['PostAd']['subsubcat_id'];
     		}
-    		$cat_name = Categories::find()->where(['SubCategoryID'=>$subcat_id])->one();
-    		return $this->render('ad-description', ['model'=>$model, 'catList'=>$catList, 'info'=>$info, 'cname'=>$cat_name['Name']]);
+
+    		$cname = Categories::find()->where(['uid'=>$category_id])->one();
+    		$main_cat_name = $cname['name'];
+    		if(!empty($subcat_id)){
+	        	$sname = Categories::find()->where(['uid'=>$subcat_id])->one();
+	        	$sub_cat_name = $sname['name'];
+	        } else {
+	        	$sub_cat_name = "";
+	        }
+    		$ssub_name = Categories::find()->where(['uid'=>$subsubcat_id])->one();
+    		$sub_sub_cat_name = $ssub_name['name'];
+    		
+    		return $this->render('ad-description', ['model'=>$model, 'catList'=>$catList, 'info'=>$info, 'cname'=>$main_cat_name, 'sname'=>$sub_cat_name, 'ssname'=>$sub_sub_cat_name]);
+
     	} else {
+
     		return $this->render('index', ['model'=>$model, 'catList'=>$catList]);
+    	
     	}
     }
 
@@ -77,13 +110,13 @@ class DefaultController extends Controller
 	    
 	    $query->select('*')
 	        ->from('categories')
-	        ->where('Name LIKE "%' . $q .'%"')
-	        ->orderBy('Name');
+	        ->where('name LIKE "%' . $q .'%"')
+	        ->orderBy('name');
 	    $command = $query->createCommand();
 	    $data = $command->queryAll();
 	    $out = [];
 	    foreach ($data as $d) {
-	        $out[] = ['value' => $d['Name']];
+	        $out[] = ['value' => $d['name']];
 	    }
 	    echo Json::encode($out);
 	}
@@ -105,28 +138,26 @@ class DefaultController extends Controller
 	public function actionSubsubcategories() {
 	    $out = [];
 	    if (isset($_POST['depdrop_parents'])) {
-	        $ids = $_POST['depdrop_parents'];
-	        $cat_id = empty($ids[0]) ? null : $ids[0];
-	        $subcat_id = empty($ids[1]) ? null : $ids[1];
-	        if ($cat_id != null) {
-	           $data = self::getSubsubCatList($cat_id, $subcat_id);
-	           echo Json::encode(['output'=>$data]);
-	           return;
+	        $parents = $_POST['depdrop_parents'];
+	        if ($parents != null) {
+	            $cat_id = $parents[0];
+	            $out = self::getSubCatList($cat_id);
+	            echo Json::encode(['output'=>$out, 'selected'=>'']);
+	            return;
 	        }
 	    }
 	    echo Json::encode(['output'=>'', 'selected'=>'']);
 	}
 
-
 	public function getSubCatList($cat_id)
 	{
-		$data=Categories::find()->where(['CategoryID'=>$cat_id])->select(['SubCategoryID As id','Name AS name' ])->asArray()->all();
+		$data=Categories::find()->where(['parent'=>$cat_id])->select(['uid As id','name AS name' ])->asArray()->all();
     	return $data;
 	}
 
 	public function getSubsubCatList($subcat_id)
 	{
-		$data=Categories::find()->where(['CategoryID'=>$subcat_id])->select(['CategoryID As id','Name AS name' ])->asArray()->all();
+		$data=Categories::find()->where(['parent'=>$subcat_id])->select(['uid As id','name AS name' ])->asArray()->all();
     	return $data;
 	}
 

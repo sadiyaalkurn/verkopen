@@ -4,10 +4,12 @@
   <label>Selected Category</label>
 </div>
 <div class="col-sm-5">
-  <span><?php echo ucwords($cname);?></span>
+  <span><?php echo ucwords($cname);?>-><?php echo ucwords($sname);?>-><?php echo ucwords($ssname);?></span>
 </div>
 </div>
-
+<?php
+  //foreach ($variable as $key => $value) {
+?>
 <div class="row field-row">
 <div class="col-sm-3">
   <label>Type of Add:</label>
@@ -19,7 +21,7 @@
     ?>
 </div>
 </div>
-
+<?php //} ?>
 <div class="row field-row">
 <div class="col-sm-3">
   <label>Add Title</label>

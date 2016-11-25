@@ -24,7 +24,7 @@ $this->title = "Post Your Ad";
                         1 => [
                             'title' => 'Add Description',
                             'icon' => 'glyphicon glyphicon-list-alt',
-                            'content' => $this->render('steps/_add_description', ['model' => $model, 'form' => $form, 'info'=>$info, 'cname'=>$cname]),
+                            'content' => $this->render('steps/_add_description', ['model' => $model, 'form' => $form, 'info'=>$info, 'cname'=>$cname, 'sname'=>$sname, 'ssname'=>$ssname,]),
                                 'next' => [
                                         'title' => 'Next',
                                         'options' => [

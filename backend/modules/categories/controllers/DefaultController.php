@@ -20,7 +20,7 @@ class DefaultController extends Controller
     	if (\Yii::$app->user->getIsGuest()) {
             return $this->redirect(['/site/login']);
         };
-        $dataProvider = new ActiveDataProvider(['query' => Categories::find()->where(['SubCategoryID'=>0])]);
+        $dataProvider = new ActiveDataProvider(['query' => Categories::find()->where(['parent'=>0])]);
         return $this->render('index', ['dataProvider' => $dataProvider]);
     }
 
@@ -29,8 +29,8 @@ class DefaultController extends Controller
         if (\Yii::$app->user->getIsGuest()) {
             return $this->redirect(['/site/login']);
         };
-        $cname = Categories::find()->where(['CategoryID' => $id])->one();
-        $dataProvider = new ActiveDataProvider(['query' => Categories::find()->where(['CategoryID'=>$id])]);
+        $cname = Categories::find()->where(['parent' => $id])->one();
+        $dataProvider = new ActiveDataProvider(['query' => Categories::find()->where(['parent'=>$id])]);
         return $this->render('view', ['dataProvider' => $dataProvider, 'cname'=>$cname]);
     }
 

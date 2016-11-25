@@ -20,7 +20,7 @@ $this->title = "Categories";
         'columns' => [
 
             //'text',
-            'Name',
+            'name',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template'=>'{update} {view} {delete}',
@@ -29,7 +29,7 @@ $this->title = "Categories";
                         return Html::a('<span class="fa fa-trash"></span>', $url, [
                             'title' => Yii::t('app', 'Delete'),
                             'class' => 'btn delete btn-xs',
-                            'id' => $model->id
+                            'id' => $model->uid
                         ]);
                     },
                     'update' => function( $url, $model ) {
@@ -47,13 +47,13 @@ $this->title = "Categories";
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
                     if ( $action === "update" ) {
-                        $url = Yii::$app->urlManager->createUrl(['/categories/default/update','id'=>$model->id]);
+                        $url = Yii::$app->urlManager->createUrl(['/categories/default/update','id'=>$model->uid]);
                         return $url;
                     } elseif($action === 'delete'){
-                        $url = Yii::$app->urlManager->createUrl(['/categories/default/delete','id'=>$model->id]);
+                        $url = Yii::$app->urlManager->createUrl(['/categories/default/delete','id'=>$model->uid]);
                         return $url;
                     } elseif($action === 'view'){
-                        $url = Yii::$app->urlManager->createUrl(['/categories/default/view','id'=>$model->CategoryID]);
+                        $url = Yii::$app->urlManager->createUrl(['/categories/default/view','id'=>$model->uid]);
                         return $url;
                     }  
                 }
