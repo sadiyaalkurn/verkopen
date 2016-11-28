@@ -1,27 +1,45 @@
+<?php use frontend\modules\postad\controllers\DefaultController; ?>
 <h2>Add Description</h2>
 <div class="row field-row">
 <div class="col-sm-3">
   <label>Selected Category</label>
 </div>
 <div class="col-sm-5">
-  <span><?php echo ucwords($cname);?>-><?php echo ucwords($sname);?>-><?php echo ucwords($ssname);?></span>
+  <span style="font-weight: normal;"><?php echo ucwords($cname);?> <i class="fa fa-long-arrow-right" aria-hidden="true"></i> <?php if(empty($sname)) { } else { ?><?php echo ucwords($sname);?> <i class="fa fa-long-arrow-right" aria-hidden="true"></i> <?php } ?><?php echo ucwords($ssname);?></span>
 </div>
 </div>
 <?php
-  //foreach ($variable as $key => $value) {
+  foreach ($attributes as $key => $property) {
 ?>
 <div class="row field-row">
 <div class="col-sm-3">
-  <label>Type of Add:</label>
+  <label><?php echo $property->name;?>:</label>
 </div>
+<?php
+$Attvalue = DefaultController::getSubAttributes($property->uid);
+?>
 <div class="col-sm-5">
-    <?php
-    $list = [0 => 'Offered', 1 => 'Wanted'];
-    echo $form->field($model, 'type_of_ad')->radioList($list)->label(false); 
-    ?>
+<?php
+if(!empty($Attvalue)) {
+?>
+<select name="PostAd[<?php echo $property->name;?>]" class="form-control">
+<option value=""> - Select - </option>
+<?php
+  foreach ($Attvalue as $key => $value) {
+?>
+<option value="<?php echo $value->name;?>"><?php echo $value->name;?></option>
+<?php } ?>
+</select>
+<?php
+} else {
+?>
+<input type="text" id="<?php echo $property->name;?>" class="form-control" name="PostAd[<?php echo $property->name;?>]" placeholder="Enter <?php echo $property->name;?>">
+<?php
+}
+?>
 </div>
 </div>
-<?php //} ?>
+<?php } ?>
 <div class="row field-row">
 <div class="col-sm-3">
   <label>Add Title</label>
@@ -146,7 +164,14 @@
     ?>
 </div>
 </div>
-
+<?php
+//print("<pre>".print_r($uerprofile,true)."</pre>");
+$info->name_at_ad = $uerprofile[0]['fname'].' '.$uerprofile[0]['lname'];
+$info->email_address = $uerprofile[0]['email'];
+$info->phone = $uerprofile[0]['phone'];
+$info->location = $uerprofile[0]['street'];
+$info->zip_code = $uerprofile[0]['zipcode'];
+?>
 <div class="row field-row">
 <div class="col-sm-3">
   <label>Contact Information and preference:</label>

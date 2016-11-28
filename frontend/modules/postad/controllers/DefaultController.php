@@ -6,11 +6,12 @@ use yii\web\Controller;
 use frontend\modules\postad\models\PostAd;
 use frontend\modules\postad\models\PostAdContactInfo;
 use backend\modules\categories\models\Categories;
+use backend\modules\categories_attribute\models\CategoriesAttributes;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use Yii;
 use yii\db\Query;
-
+use frontend\modules\postad\models\PostAdAttributes;
 /**
  * Default controller for the `postad` module
  */
@@ -60,10 +61,18 @@ class DefaultController extends Controller
             return $this->redirect('../../user/login');
         }
     	$model = new PostAd();
+    	$cattribute = new PostAdAttributes();
     	$info = new PostAdContactInfo();
     	$Categories = Categories::find()->where(['parent'=>0])->orderBy(['name' => SORT_ASC])->all();
     	$catList=ArrayHelper::map($Categories,'uid','name');
-
+    	$userId = Yii::$app->user->getId();
+    	$query = new Query;
+    	$query	->select(['user.email AS email', 'profile.fname as fname', 'profile.lname as lname', 'profile.phone as phone', 'profile.zipcode as zipcode', 'profile.street as street'])  
+		->from('user')
+		->leftJoin('profile', 'profile.user_id = user.id')
+		->where(['profile.user_id'=>$userId]);
+	    $command = $query->createCommand();
+	    $uerprofile = $command->queryAll();
     	if(Yii::$app->request->isPost){
     		$post = Yii::$app->request->post();
     		if(empty($post['PostAd'])) {
@@ -86,8 +95,10 @@ class DefaultController extends Controller
 	        }
     		$ssub_name = Categories::find()->where(['uid'=>$subsubcat_id])->one();
     		$sub_sub_cat_name = $ssub_name['name'];
+
+    		$attributes = self::getAttributes($category_id);
     		
-    		return $this->render('ad-description', ['model'=>$model, 'catList'=>$catList, 'info'=>$info, 'cname'=>$main_cat_name, 'sname'=>$sub_cat_name, 'ssname'=>$sub_sub_cat_name]);
+    		return $this->render('ad-description', ['model'=>$model, 'catList'=>$catList, 'info'=>$info, 'cname'=>$main_cat_name, 'sname'=>$sub_cat_name, 'ssname'=>$sub_sub_cat_name, 'attributes'=>$attributes, 'uerprofile'=>$uerprofile, 'cattribute'=>$cattribute]);
 
     	} else {
 
@@ -160,5 +171,85 @@ class DefaultController extends Controller
 		$data=Categories::find()->where(['parent'=>$subcat_id])->select(['uid As id','name AS name' ])->asArray()->all();
     	return $data;
 	}
+
+	public function getAttributes($category_id)
+	{
+		$data=CategoriesAttributes::find()->where(['category_id'=>$category_id, 'type'=>'property', 'parent'=>0])->all();
+    	return $data;
+	}
+
+
+	public function getSubAttributes($category_id)
+	{
+		$data=CategoriesAttributes::find()->where(['parent'=>$category_id, 'type'=>'value', 'category_id'=>0])->all();
+    	return $data;
+	}
+
+	/*public function getAttributes($category_id) {
+        $attributesArray = [];
+        $attribute = CategoriesAttributes::find()->where(['category_id'=>$category_id, 'type'=>'property', 'parent'=>0])->all();
+        $maincat = [];
+        foreach ($attribute as $key => $value) {
+        	//$attributesArray['parent'][]= $value->name;
+        	$attribute_child = CategoriesAttributes::find()->where(['parent'=>$value->uid, 'type'=>'value', 'category_id'=>0])->all();
+        	$child_attribute = [];
+        	if(empty($attribute_child)) {
+        		$attributesArray[$key]['parent'][$key][$value->name] = $value->name;
+        	} else {
+        		foreach ($attribute_child as $keyc => $valuec) {
+        			$attributesArray[$key]['parent'][$key][$value->name]['child'][] = $valuec->name;
+        		}
+        	}
+        	
+        }
+        //print("<pre>".print_r($attributesArray,true)."</pre>");
+        foreach ($attributesArray as $key => $value) {
+        	print("<pre>".print_r($value['parent'][$key],true)."</pre>");
+        	//echo $value['parent'];
+        	foreach ($value as $main_value) {
+        		# code...
+        	}
+        }
+        die();
+    }
+
+
+    public function getAttributes($category_id, $selected_category_id, $level_string) 
+    {
+        $select_str =[];
+        if(!$level_string)
+	      {
+	          $level_string='';
+	      }
+
+        if ($cat_arr = CategoriesAttributes::find()->where(['category_id'=>$category_id, 'type'=>'property', 'parent'=>0])->all()) {
+            foreach ($cat_arr as $keyv => $cat) {
+                $select_str[]=$cat->name;
+            }
+        }
+        else
+        {
+            return false;
+        }
+       
+        return $select_str;
+        print("<pre>".print_r($select_str,true)."</pre>");
+        die();
+    }
+
+    public function getSubAttributes($uid, $selected_category_id, $level_string) 
+    {
+        $data =[];
+        if ($cat_arr = CategoriesAttributes::find()->where(['parent'=>$uid, 'type'=>'value', 'category_id'=>0])->all()) {
+            foreach ($cat_arr as $cat) {
+                $data[]= "-----".$cat->name."<br />";
+            }
+        }
+        else
+        {
+            return false;
+        }
+        return $data;
+    }*/
 
 }

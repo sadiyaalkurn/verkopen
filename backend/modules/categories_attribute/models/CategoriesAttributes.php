@@ -1,25 +1,27 @@
 <?php
 
-namespace backend\modules\categories\models;
+namespace backend\modules\categories_attribute\models;
 
 use Yii;
 
 /**
- * This is the model class for table "categories".
+ * This is the model class for table "categories_attributes".
  *
  * @property integer $uid
  * @property string $name
  * @property integer $parent
+ * @property string $type
+ * @property integer $category_id
  * @property string $parent_list
  */
-class Categories extends \yii\db\ActiveRecord
+class CategoriesAttributes extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'categories';
+        return 'categories_attributes';
     }
 
     /**
@@ -28,9 +30,9 @@ class Categories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent'], 'integer'],
+            [['parent', 'category_id'], 'integer'],
             [['parent_list'], 'string'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'type'], 'string', 'max' => 45],
         ];
     }
 
@@ -43,7 +45,12 @@ class Categories extends \yii\db\ActiveRecord
             'uid' => 'Uid',
             'name' => 'Name',
             'parent' => 'Parent',
+            'type' => 'Type',
+            'category_id' => 'Category ID',
             'parent_list' => 'Parent List',
         ];
     }
+
+
+    
 }

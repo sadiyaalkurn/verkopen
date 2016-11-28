@@ -7,10 +7,10 @@ use Yii;
 /**
  * This is the model class for table "categories".
  *
- * @property integer $uid
- * @property string $name
+ * @property integer $id
  * @property integer $parent
- * @property string $parent_list
+ * @property string $Name
+ * @property string $SubCategoryID
  */
 class Categories extends \yii\db\ActiveRecord
 {
@@ -28,9 +28,9 @@ class Categories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['parent'], 'required'],
             [['parent'], 'integer'],
-            [['parent_list'], 'string'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'parent_list'], 'string', 'max' => 45],
         ];
     }
 
@@ -40,10 +40,10 @@ class Categories extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'uid' => 'Uid',
+            'uid' => 'ID',
+            'parent' => 'Category ID',
             'name' => 'Name',
-            'parent' => 'Parent',
-            'parent_list' => 'Parent List',
+            'parent_list' => 'Sub Category ID',
         ];
     }
 }

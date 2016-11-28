@@ -35,7 +35,10 @@ return [
         ],
         'categories' => [
             'class' => 'backend\modules\categories\Module',
-        ]
+        ],
+        'adformtype' => [
+            'class' => 'backend\modules\adformtype\AdFormType',
+        ],
     ],
     'homeUrl' => '/admin',
     'components' => [
