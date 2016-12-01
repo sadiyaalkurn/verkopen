@@ -12,6 +12,8 @@ use yii\helpers\Json;
 use Yii;
 use yii\db\Query;
 use frontend\modules\postad\models\PostAdAttributes;
+use backend\modules\adformattribute\models\AdFormAttribute;
+use backend\modules\platforms\models\Platforms;
 /**
  * Default controller for the `postad` module
  */
@@ -63,8 +65,10 @@ class DefaultController extends Controller
     	$model = new PostAd();
     	$cattribute = new PostAdAttributes();
     	$info = new PostAdContactInfo();
+        /** get main categories **/
     	$Categories = Categories::find()->where(['parent'=>0])->orderBy(['name' => SORT_ASC])->all();
     	$catList=ArrayHelper::map($Categories,'uid','name');
+        /** get user data **/
     	$userId = Yii::$app->user->getId();
     	$query = new Query;
     	$query	->select(['user.email AS email', 'profile.fname as fname', 'profile.lname as lname', 'profile.phone as phone', 'profile.zipcode as zipcode', 'profile.street as street'])  
@@ -73,6 +77,8 @@ class DefaultController extends Controller
 		->where(['profile.user_id'=>$userId]);
 	    $command = $query->createCommand();
 	    $uerprofile = $command->queryAll();
+
+        /** if post data **/
     	if(Yii::$app->request->isPost){
     		$post = Yii::$app->request->post();
     		if(empty($post['PostAd'])) {
@@ -96,9 +102,18 @@ class DefaultController extends Controller
     		$ssub_name = Categories::find()->where(['uid'=>$subsubcat_id])->one();
     		$sub_sub_cat_name = $ssub_name['name'];
 
+            /** attributes as per category selection **/
     		$attributes = self::getAttributes($category_id);
-    		
-    		return $this->render('ad-description', ['model'=>$model, 'catList'=>$catList, 'info'=>$info, 'cname'=>$main_cat_name, 'sname'=>$sub_cat_name, 'ssname'=>$sub_sub_cat_name, 'attributes'=>$attributes, 'uerprofile'=>$uerprofile, 'cattribute'=>$cattribute]);
+
+    		/** form fields **/
+            $formfeilds = AdFormAttribute::find()->where(['status'=>0])->all();
+
+            /** Get platforms **/
+            $platforms = Platforms::find()->where(['status'=>0])->all();
+            $platformsList=ArrayHelper::map($platforms,'id','name');
+
+            /** Post data page step one **/
+    		return $this->render('ad-description', ['model'=>$model, 'catList'=>$catList, 'info'=>$info, 'cname'=>$main_cat_name, 'sname'=>$sub_cat_name, 'ssname'=>$sub_sub_cat_name, 'attributes'=>$attributes, 'uerprofile'=>$uerprofile, 'cattribute'=>$cattribute, 'formfeilds'=>$formfeilds, 'platforms'=>$platformsList]);
 
     	} else {
 

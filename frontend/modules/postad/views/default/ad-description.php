@@ -2,7 +2,7 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
-frontend\assets\DropifyAsset::register($this);
+use drsdre\wizardwidget\WizardWidget;
 
 $this->title = "Post Your Ad";
 ?>
@@ -19,36 +19,53 @@ $this->title = "Post Your Ad";
                 ]); ?>
                 <?php
                 $wizard_config = [
-                    'id' => 'stepwizard',
-                    'steps' => [
-                        1 => [
-                            'title' => 'Add Description',
-                            'icon' => 'glyphicon glyphicon-list-alt',
-                            'content' => $this->render('steps/_add_description', ['model' => $model, 'form' => $form, 'info'=>$info, 'cname'=>$cname, 'sname'=>$sname, 'ssname'=>$ssname,'attributes'=>$attributes,'uerprofile'=>$uerprofile]),
-                                'next' => [
-                                        'title' => 'Next',
-                                        'options' => [
-                                            'class' => 'btn btn-warning btn-block'
-                                        ],
-                                    ],
-                        ],
-                        2 => [
-                            'title' => 'Choose ad Sites',
-                            'icon' => 'glyphicon glyphicon-th-list',
-                            'content' => $this->render('steps/_choose_platforms', ['model' => $model, 'form' => $form]),
-                            'buttons' => [
-                                'save' => [
-                                    'title' => 'Complete',
-                                    'options' => [
-                                        'class' => 'btn btn-warning btn-block',
-                                        'type' => 'submit'
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                //'complete_content' => "You are done!", // Optional final screen
-                ];
+    'steps' => [
+        '1' => [
+            'title' => 'Step 1',
+            'icon' => 'glyphicon glyphicon-cloud-download',
+            'content' => $this->render('_step1', ['form' => $form, 'Model' => $Model]),
+            'buttons' => [
+                'next' => [
+                    'title' => 'Next: Step 2',
+                    'options' => ['class'=> 'btn btn-success']
+                ]
+            ],
+        ],
+        '2' => [
+            'title' => 'Step 2',
+            'icon' => 'glyphicon glyphicon-cloud-upload',
+            'content' => $this->render('_step2', ['form' => $form, 'Model' => $Model]),
+            'buttons' => [
+            'buttons' => [
+                'next' => [
+                    'title' => 'Next: Final Step 3',
+                    'options' => ['class'=> 'btn btn-success']
+                ]
+            ],
+        ],
+        '3' => [
+            'title' => 'Step 3 - Final',
+            'icon' => 'glyphicon glyphicon-ok',
+            'content' => $this->render('_step3', ['form' => $form, 'Dataset' => $Dataset]),
+            'buttons' => [
+                'save' => [
+                    'html' => Html::submitButton(
+                        Yii::t('app', 'Load data'),
+                        [
+                            'class' => 'btn btn-success',
+                            'id' => 'wizard_step3_final',
+                            'name' => 'step',
+                            'value' => 'save-final'
+                        ]
+                    ),
+                ],
+            ],
+        ],
+    ],
+    'start_step' => $step,
+];
+
+echo WizardWidget::widget($wizard_config);
                 ?>
                 <div class="row field-row">
                     <div class="col-sm-12">

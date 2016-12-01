@@ -11,11 +11,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ad-form-type-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Ad Form Type', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <!--<p>
+        <?php //echo Html::a('Create Ad Form Type', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>-->
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -24,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'type_id',
             'type_name',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'visible'=>false],
         ],
     ]); ?>
 </div>

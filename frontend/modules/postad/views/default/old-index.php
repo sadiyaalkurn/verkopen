@@ -3,7 +3,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 frontend\assets\DropifyAsset::register($this);
-
+use drsdre\wizardwidget\WizardWidget;
 $this->title = "Post Your Ad";
 ?>
     <div class="add-desc-section">

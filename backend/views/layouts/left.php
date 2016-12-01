@@ -36,6 +36,8 @@
                     ['label' => 'Our Partners', 'icon' => 'fa fa-globe', 'url' => ['/ourpartners']],
                     ['label' => 'Categories', 'icon' => 'fa fa-files-o', 'url' => ['/categories']],
                     ['label' => 'Form Attribute Type', 'icon' => 'fa fa-columns', 'url' => ['/adformtype']],
+                    ['label' => 'Form Attributes', 'icon' => 'fa fa-file-text', 'url' => ['/adformattribute']],
+                    ['label' => 'Platforms', 'icon' => 'fa fa-share-square-o', 'url' => ['/platforms']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'Same tools',

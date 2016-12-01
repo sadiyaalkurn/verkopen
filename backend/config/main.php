@@ -39,6 +39,12 @@ return [
         'adformtype' => [
             'class' => 'backend\modules\adformtype\AdFormType',
         ],
+        'adformattribute' => [
+            'class' => 'backend\modules\adformattribute\Module',
+        ],
+        'platforms' => [
+            'class' => 'backend\modules\platforms\Module',
+        ],
     ],
     'homeUrl' => '/admin',
     'components' => [

@@ -1,4 +1,14 @@
-<?php use frontend\modules\postad\controllers\DefaultController; ?>
+<?php 
+use frontend\modules\postad\controllers\DefaultController;
+frontend\assets\DropifyAsset::register($this);
+use yii\helpers\Html;
+$info->name_at_ad = $uerprofile[0]['fname'].' '.$uerprofile[0]['lname'];
+$info->email_address = $uerprofile[0]['email'];
+$info->phone = $uerprofile[0]['phone'];
+$info->location = $uerprofile[0]['street'];
+$info->zip_code = $uerprofile[0]['zipcode'];
+
+?>
 <h2>Add Description</h2>
 <div class="row field-row">
 <div class="col-sm-3">
@@ -40,40 +50,55 @@ if(!empty($Attvalue)) {
 </div>
 </div>
 <?php } ?>
+<?php
+  foreach ($formfeilds as $feild) {
+    $valuefeild = explode(',', $feild->value);
+?>
 <div class="row field-row">
 <div class="col-sm-3">
-  <label>Add Title</label>
+  <label><?php echo ucwords($feild->name);?></label>
 </div>
 <div class="col-sm-5">
   <div class="form-group">
     <?php
-        echo $form->field($model, 'title')->textInput(['class'=>'form-control', 'placeholder'=>'Enter Ad Title'])->label(false);
+        if($feild->type==1):
+          echo Html::textInput($feild->name,'',['class'=>'form-control', 'placeholder'=>ucwords($feild->name)]);
+        endif;
+        if($feild->type==2):
+          echo Html::radioList($feild->name, null, $valuefeild, ['class' => 'form-group']);
+        endif;
+        if($feild->type==3):
+          echo Html::checkboxList($feild->name, null, $valuefeild, ['class' => 'form-group']);
+        endif;
+        if($feild->type==4):
+          echo Html::textArea($feild->name,null,['class'=>'form-control', 'style'=>'height:100px', 'placeholder'=>ucwords($feild->name)]);
+        endif;
     ?>
   </div>
 </div>
 </div>
-
-<div class="row field-row">
+<?php } ?>
+<!--<div class="row field-row">
 <div class="col-sm-3">
   <label>Type</label>
 </div>
 <div class="col-sm-5">
   <div class="form-group">
     <?php
-        echo $form->field($model, 'type')->textInput(['class'=>'form-control', 'placeholder'=>'Enter Type'])->label(false);
+        //echo $form->field($model, 'type')->textInput(['class'=>'form-control', 'placeholder'=>'Enter Type'])->label(false);
     ?>
   </div>
 </div>
-</div>
+</div>-->
 
-<div class="row field-row">
+<!--<div class="row field-row">
 <div class="col-sm-3">
   <label>Delivery</label>
 </div>
 <div class="col-sm-5">
   <div class="form-group">
     <?php
-        echo $form->field($model, 'delivery')->textInput(['class'=>'form-control', 'placeholder'=>'Enter Delivery'])->label(false);
+        //echo $form->field($model, 'delivery')->textInput(['class'=>'form-control', 'placeholder'=>'Enter Delivery'])->label(false);
     ?>
   </div>
 </div>
@@ -85,8 +110,8 @@ if(!empty($Attvalue)) {
 </div>
 <div class="col-sm-5">
   <?php
-    $characterstics_list = [0 => 'With', 1 => 'No'];
-    echo $form->field($model, 'characterstics')->radioList($characterstics_list)->label(false); 
+    //$characterstics_list = [0 => 'With', 1 => 'No'];
+    //echo $form->field($model, 'characterstics')->radioList($characterstics_list)->label(false); 
     ?>
 </div>
 </div>
@@ -97,11 +122,11 @@ if(!empty($Attvalue)) {
 </div>
 <div class="col-sm-5">
   <?php
-    $location_list = [0 => 'Yes', 1 => 'No'];
-    echo $form->field($model, 'show_location_map')->radioList($location_list)->label(false); 
+    //$location_list = [0 => 'Yes', 1 => 'No'];
+    //echo $form->field($model, 'show_location_map')->radioList($location_list)->label(false); 
     ?>
 </div>
-</div>
+</div>-->
 
 <div class="row field-row">
 <div class="col-sm-3">
@@ -114,14 +139,14 @@ if(!empty($Attvalue)) {
 </div>
 </div>
 
-<div class="row field-row">
+<!--<div class="row field-row">
 <div class="col-sm-3">
   <label>Ad Text</label>
 </div>
 <div class="col-sm-5">
   <div class="form-group">
     <?php
-        echo $form->field($model, 'text')->textArea(['class'=>'form-control', 'placeholder'=>'Enter Text'])->label(false);
+        //echo $form->field($model, 'text')->textArea(['class'=>'form-control', 'placeholder'=>'Enter Text'])->label(false);
     ?>
   </div>
 </div>
@@ -134,7 +159,7 @@ if(!empty($Attvalue)) {
 <div class="col-sm-5">
   <div class="form-group">
     <?php
-        echo $form->field($model, 'website')->textInput(['class'=>'form-control', 'placeholder'=>'Enter Website'])->label(false);
+        //echo $form->field($model, 'website')->textInput(['class'=>'form-control', 'placeholder'=>'Enter Website'])->label(false);
     ?>
   </div>
 </div>
@@ -147,7 +172,7 @@ if(!empty($Attvalue)) {
 <div class="col-sm-5">
   <div class="form-group">
     <?php
-        echo $form->field($model, 'youtube')->textInput(['class'=>'form-control', 'placeholder'=>'Enter Youtube Link'])->label(false);
+        //echo $form->field($model, 'youtube')->textInput(['class'=>'form-control', 'placeholder'=>'Enter Youtube Link'])->label(false);
     ?>
   </div>
 </div>
@@ -159,19 +184,12 @@ if(!empty($Attvalue)) {
 </div>
 <div class="col-sm-5">
   <?php
-    $price_list = [0 => 'Asking Price', 1 => 'Choose another type of price'];
-    echo $form->field($model, 'price')->radioList($price_list)->label(false); 
+    //$price_list = [0 => 'Asking Price', 1 => 'Choose another type of price'];
+    //echo $form->field($model, 'price')->radioList($price_list)->label(false); 
     ?>
 </div>
-</div>
-<?php
-//print("<pre>".print_r($uerprofile,true)."</pre>");
-$info->name_at_ad = $uerprofile[0]['fname'].' '.$uerprofile[0]['lname'];
-$info->email_address = $uerprofile[0]['email'];
-$info->phone = $uerprofile[0]['phone'];
-$info->location = $uerprofile[0]['street'];
-$info->zip_code = $uerprofile[0]['zipcode'];
-?>
+</div>-->
+
 <div class="row field-row">
 <div class="col-sm-3">
   <label>Contact Information and preference:</label>
@@ -203,3 +221,10 @@ $info->zip_code = $uerprofile[0]['zipcode'];
     ?>
 </div>
 </div>
+<?php
+$this->registerJsFile('@web/js/step.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+
+$this->registerJs( <<< EOT_JS_CODE
+$('.dropify').dropify();
+EOT_JS_CODE
+);
