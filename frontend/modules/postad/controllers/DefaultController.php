@@ -110,10 +110,10 @@ class DefaultController extends Controller
 
             /** Get platforms **/
             $platforms = Platforms::find()->where(['status'=>0])->all();
-            $platformsList=ArrayHelper::map($platforms,'id','name');
+            //$platformsList=ArrayHelper::map($platforms,'id','name');
 
             /** Post data page step one **/
-    		return $this->render('ad-description', ['model'=>$model, 'catList'=>$catList, 'info'=>$info, 'cname'=>$main_cat_name, 'sname'=>$sub_cat_name, 'ssname'=>$sub_sub_cat_name, 'attributes'=>$attributes, 'uerprofile'=>$uerprofile, 'cattribute'=>$cattribute, 'formfeilds'=>$formfeilds, 'platforms'=>$platformsList]);
+    		return $this->render('ad-description', ['model'=>$model, 'catList'=>$catList, 'info'=>$info, 'cname'=>$main_cat_name, 'sname'=>$sub_cat_name, 'ssname'=>$sub_sub_cat_name, 'attributes'=>$attributes, 'uerprofile'=>$uerprofile, 'cattribute'=>$cattribute, 'formfeilds'=>$formfeilds, 'platforms'=>$platforms]);
 
     	} else {
 

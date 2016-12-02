@@ -62,16 +62,19 @@ if(!empty($Attvalue)) {
   <div class="form-group">
     <?php
         if($feild->type==1):
-          echo Html::textInput($feild->name,'',['class'=>'form-control', 'placeholder'=>ucwords($feild->name)]);
+          echo Html::textInput($feild->name,'',['class'=>'form-control', 'placeholder'=>ucwords($feild->name), 'data-validation'=>'required']);
         endif;
         if($feild->type==2):
-          echo Html::radioList($feild->name, null, $valuefeild, ['class' => 'form-group']);
+          echo Html::radioList($feild->name, null, $valuefeild, ['class' => 'form-control']);
         endif;
         if($feild->type==3):
-          echo Html::checkboxList($feild->name, null, $valuefeild, ['class' => 'form-group']);
+          echo Html::checkboxList($feild->name, null, $valuefeild, ['class' => 'form-control']);
         endif;
         if($feild->type==4):
           echo Html::textArea($feild->name,null,['class'=>'form-control', 'style'=>'height:100px', 'placeholder'=>ucwords($feild->name)]);
+        endif;
+        if($feild->type==5):
+          echo Html::dropDownList($feild->name, null, $valuefeild, ['class' => 'form-control']);
         endif;
     ?>
   </div>
@@ -222,8 +225,6 @@ if(!empty($Attvalue)) {
 </div>
 </div>
 <?php
-$this->registerJsFile('@web/js/step.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-
 $this->registerJs( <<< EOT_JS_CODE
 $('.dropify').dropify();
 EOT_JS_CODE

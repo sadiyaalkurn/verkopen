@@ -2,7 +2,6 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use drsdre\wizardwidget\WizardWidget;
 
 $this->title = "Post Your Ad";
 ?>
@@ -14,90 +13,98 @@ $this->title = "Post Your Ad";
             <?php $form = ActiveForm::begin([
                     'id' => 'post-ad',
                     'options' => [
-                        'enctype' => 'multipart/form-data'
+                        'enctype' => 'multipart/form-data',
                     ]
                 ]); ?>
                 <?php
                 $wizard_config = [
-    'steps' => [
-        '1' => [
-            'title' => 'Step 1',
-            'icon' => 'glyphicon glyphicon-cloud-download',
-            'content' => $this->render('_step1', ['form' => $form, 'Model' => $Model]),
-            'buttons' => [
-                'next' => [
-                    'title' => 'Next: Step 2',
-                    'options' => ['class'=> 'btn btn-success']
-                ]
-            ],
-        ],
-        '2' => [
-            'title' => 'Step 2',
-            'icon' => 'glyphicon glyphicon-cloud-upload',
-            'content' => $this->render('_step2', ['form' => $form, 'Model' => $Model]),
-            'buttons' => [
-            'buttons' => [
-                'next' => [
-                    'title' => 'Next: Final Step 3',
-                    'options' => ['class'=> 'btn btn-success']
-                ]
-            ],
-        ],
-        '3' => [
-            'title' => 'Step 3 - Final',
-            'icon' => 'glyphicon glyphicon-ok',
-            'content' => $this->render('_step3', ['form' => $form, 'Dataset' => $Dataset]),
-            'buttons' => [
-                'save' => [
-                    'html' => Html::submitButton(
-                        Yii::t('app', 'Load data'),
-                        [
-                            'class' => 'btn btn-success',
-                            'id' => 'wizard_step3_final',
-                            'name' => 'step',
-                            'value' => 'save-final'
-                        ]
-                    ),
-                ],
-            ],
-        ],
-    ],
-    'start_step' => $step,
-];
-
-echo WizardWidget::widget($wizard_config);
+                    'id' => 'stepwizard',
+                    'steps' => [
+                        1 => [
+                            'title' => 'Add Description',
+                            'icon' => 'glyphicon glyphicon-list-alt',
+                            'content' => $this->render('steps/_add_description', ['model' => $model, 'form' => $form, 'info'=>$info, 'cname'=>$cname, 'sname'=>$sname, 'ssname'=>$ssname,'attributes'=>$attributes,'uerprofile'=>$uerprofile, 'formfeilds'=>$formfeilds]),
+                                'next' => [
+                                        'title' => 'Next',
+                                        'options' => [
+                                            'class' => 'btn btn-warning btn-block',
+                                        ],
+                                    ],
+                        ],
+                        2 => [
+                            'title' => 'Connect Platforms',
+                            'icon' => 'glyphicon glyphicon-th-list',
+                            'content' => $this->render('steps/_choose_platforms', ['model' => $model, 'form' => $form, 'platforms'=>$platforms]),
+                            'buttons' => [
+                                'save' => [
+                                    'title' => 'Complete',
+                                    'options' => [
+                                        'class' => 'btn btn-warning btn-block',
+                                        'type' => 'submit'
+                                    ],
+                                ],
+                            ],
+                        ],
+                        3 => [
+                            'title' => 'Step 3',
+                            'icon' => 'glyphicon glyphicon-transfer',
+                            'content' => $this->render('steps/_progress'),
+                        ],
+                    ],
+                ];
                 ?>
                 <div class="row field-row">
                     <div class="col-sm-12">
-                        <!--<div class="center-icon-image">
-                            <p class="re-text">Please fill the following fields to Post Ad:</p>
-                        </div>-->
-                        <?= \drsdre\wizardwidget\WizardWidget::widget($wizard_config); ?>
+                    <?= \drsdre\wizardwidget\WizardWidget::widget($wizard_config); ?>
+                    <button type="button" id="NextValidate" class="btn btn-default">Next</button>
+                    <input type="submit" />
                     </div>
                 </div>
-
                 <?php ActiveForm::end(); ?>
           </div>
         </div>
       </div>
     </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+<script>
+  $.validate({
+    lang: 'es'
+  });
+</script>
 <?php
-$this->registerJsFile('@web/js/step.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-
 $js = <<<JS
-$('input.some-blue').iCheck({
-    checkboxClass: 'icheckbox_square-blue',
-    radioClass: 'iradio_square-blue',
-    increaseArea: '20%',
-    labelHover: true,
-    cursor: true
+$(document).ready(function () {
+
+    $('#post-ad').validate({
+        rules: {
+            Price: {
+                required: true,
+                minlength: 5
+            }
+        },
+        submitHandler: function (form) {
+            alert('valid form submitted');
+            return false;
+        }
+    });
+
 });
-$(".chosen-select").select2();
 JS;
-
-$this->registerJs($js);
-
-$this->registerJs( <<< EOT_JS_CODE
-$('.dropify').dropify();
-EOT_JS_CODE
-);
+/*$this->registerJs($js);
+$(document).ready(function(){
+$('#NextValidate').click(function() {
+    var YoutubeLink = $('#YoutubeLink').val();
+    var Price = $('#Price').val();
+    if(YoutubeLink.length == 0){
+        alert('required');
+        $('#YoutubeLink').focus();
+        return false;
+    } 
+    if(Price.length == 0){
+        alert('required');
+        $('#Price').focus();
+        return false;
+    } 
+});
+});*/
