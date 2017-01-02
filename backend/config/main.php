@@ -45,6 +45,9 @@ return [
         'platforms' => [
             'class' => 'backend\modules\platforms\Module',
         ],
+        'contents' => [
+            'class' => 'backend\modules\contents\Contents',
+        ],
     ],
     'homeUrl' => '/admin',
     'components' => [

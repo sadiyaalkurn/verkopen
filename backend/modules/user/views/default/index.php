@@ -1,12 +1,46 @@
-<div class="user-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
+<?php
+
+use yii\helpers\Html;
+use yii\grid\GridView;
+
+/* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Users';
+//$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="user-index">
+
+    <!--<h1><?= Html::encode($this->title) ?></h1>-->
+
     <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
+        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            'username',
+            //'auth_key',
+            //'password_hash',
+            //'password_reset_token',
+            'email:email',
+            //'status',
+            [
+                'attribute'=>'created_at',
+                'format'=>['date', 'php:d-m-Y'],
+            ],
+            [
+                'attribute'=>'updated_at',
+                'format'=>['date', 'php:d-m-Y'],
+            ],
+            // 'is_mail_verified',
+            // 'user_verification_token:ntext',
+            // 'access_token',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
 </div>

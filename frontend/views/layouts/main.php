@@ -16,6 +16,7 @@ frontend\assets\OwlCarouselAsset::register($this);
 
 AppAsset::register($this);
 use yii\helpers\Url;
+use backend\modules\contents\widgets\Content;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -61,9 +62,10 @@ use yii\helpers\Url;
         <div class="collapse navbar-collapse" id="navbar-menu">
             <ul class="nav navbar-nav navbar-center" data-in="fadeInDown" data-out="fadeOutUp">
                 <li><a href="<?php echo Yii::$app->homeUrl; ?>">Home</a></li>
-                <li><a href="<?= Url::to(['/site/about'])?>">About Us</a></li>
+                <?php echo Content::widget(['menu' => 0]); ?>
+                <!--<li><a href="<?= Url::to(['/site/about'])?>">About Us</a></li>
                 <li><a href="<?= Url::to(['/site/our-services'])?>">Our Services</a></li>
-                <li><a href="<?= Url::to(['/site/our-partners'])?>">Our Partners</a></li>
+                <li><a href="<?= Url::to(['/site/our-partners'])?>">Our Partners</a></li>-->
             </ul>
         </div><!-- /.navbar-collapse -->
       </div>
@@ -130,9 +132,10 @@ use yii\helpers\Url;
             <div class="col-sm-6">
               <div class="f-link">
                 <a href="<?php echo Yii::$app->homeUrl; ?>">Home</a> |
-                <a href="<?= Url::to(['/site/about'])?>">About Us</a> |
-                <a href="<?= Url::to(['/site/our-services'])?>">Our Services</a> |
-                <a href="<?= Url::to(['/site/our-partners'])?>">Our Partners</a>
+                <?php echo Content::widget(['menu' => 1]); ?>
+                <a href="<?= Url::to(['/site/contact'])?>">Contact Us</a> |
+                <!--<a href="<?= Url::to(['/site/our-services'])?>">Our Services</a> |
+                <a href="<?= Url::to(['/site/our-partners'])?>">Our Partners</a>-->
               </div>
             </div>
           </div>

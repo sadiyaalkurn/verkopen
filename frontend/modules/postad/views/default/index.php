@@ -4,19 +4,20 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 frontend\assets\DropifyAsset::register($this);
 use kartik\depdrop\DepDrop;
-
 $this->title = "Post Your Ad";
 ?>
 <style type="text/css">
     ul#result{ margin-left:-20px; } ul#result li{ list-style-type: disc; padding: 5px 0; } ul#result li:hover{ color: #EE1C25; } ul#result a{ text-decoration: none; font-size: 15px;}
+    select#cat-id,select#subcat-id,select#subsubcat-id { width: 320px; }
 </style>
+
 <div class="add-desc-section">
   <div class="container">
     <div class="row">
       <div class="col-sm-12 wow fadeIn">
         <h2>Choose Your Category</h2>
         <div id="container">
-             <input type="text" style="width: 80%; float: left;" class="form-control" id="search" placeholder="Search your category"/>
+             <input type="text" style="width: 80%; float: left; height: 50px;" class="form-control" id="search" placeholder="Search your category"/>
              <input type="button" style="margin: 0 0 0 10px;" id="button" class="btn-lg btn-warning" value="Find Result" />
              <div style="clear: both;"></div>
              <div id="pageloaddiv" style="display: none;"></div>
@@ -87,7 +88,7 @@ $(function() {
     });
 });
 $(document).ready(function(){
-     function search(){
+    function search(){
           var title=$("#search").val();
           if(title!=""){
             $('#pageloaddiv').show();

@@ -8,7 +8,7 @@
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>Super Admin</p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -31,13 +31,14 @@
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'User Management', 'icon' => 'fa fa-users', 'url' => ['/admin']],
+                    ['label' => 'User Management', 'icon' => 'fa fa-users', 'url' => ['/user']],
                     ['label' => 'Testimonials', 'icon' => 'fa fa-comments', 'url' => ['/testimonials']],
                     ['label' => 'Our Partners', 'icon' => 'fa fa-globe', 'url' => ['/ourpartners']],
                     ['label' => 'Categories', 'icon' => 'fa fa-files-o', 'url' => ['/categories']],
                     ['label' => 'Form Attribute Type', 'icon' => 'fa fa-columns', 'url' => ['/adformtype']],
                     ['label' => 'Form Attributes', 'icon' => 'fa fa-file-text', 'url' => ['/adformattribute']],
                     ['label' => 'Platforms', 'icon' => 'fa fa-share-square-o', 'url' => ['/platforms']],
+                    ['label' => 'Contents', 'icon' => 'fa fa-share-square-o', 'url' => ['/contents']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'Same tools',

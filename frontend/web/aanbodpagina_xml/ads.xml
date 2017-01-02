@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Ads>
+<Ad action="save">
+<AdID>NL6</AdID>
+<AdDate>2009-11-24 10:15:23</AdDate>
+<Title>Apple iPhone 3Gs</Title>
+<Description>
+<![CDATA[
+Met de iPhone heeft Apple de grenzen van de mobiele telefoon <br />
+verlegd door innovatieve hardwarevoorzieningen te combineren <br />
+met 's werelds meest geavanceerde besturingssysteem voor mobiele <br />
+apparatuur.
+]]>
+</Description>
+<SubCategoryID>1031</SubCategoryID>
+<Price>300.00</Price>
+<PriceSort>Bieden</PriceSort>
+<AllowBids>true</AllowBids>
+<AdType>Aangeboden</AdType>
+<Url>http://www.machinetrack.nl/bouwmachines/aanbouwdelen-bakken/overige-bakken/66424/jako-kantelbak.html</Url>
+<UrlContact>http://www.machinetrack.nl/bouwmachines/aanbouwdelen-bakken/overige-bakken/66424/jako-kantelbak.html?contact=1</UrlContact>
+<ItemState>nieuw</ItemState>
+<Images>
+<Image url="http://static.aanbodpagina.nl/img/378/vrijstaande-grote-recreatiewoning-eigen-grond1.jpg" />
+<Image url="http://static.aanbodpagina.nl/img/378/vrijstaande-grote-recreatiewoning-eigen-grond9.jpg" />
+<Image url="http://static.aanbodpagina.nl/img/378/vrijstaande-grote-recreatiewoning-eigen-grond9.jpg" />
+<Image url="http://static.aanbodpagina.nl/img/378/vrijstaande-grote-recreatiewoning-eigen-grond9.jpg" />
+<Image url="http://static.aanbodpagina.nl/img/378/vrijstaande-grote-recreatiewoning-eigen-grond9.jpg" />
+<Image url="http://static.aanbodpagina.nl/img/378/vrijstaande-grote-recreatiewoning-eigen-grond9.jpg" />
+<Image url="http://static.aanbodpagina.nl/img/378/vrijstaande-grote-recreatiewoning-eigen-grond9.jpg" />
+<Image url="http://static.aanbodpagina.nl/img/378/vrijstaande-grote-recreatiewoning-eigen-grond9.jpg" />
+<Image url="http://static.aanbodpagina.nl/img/378/vrijstaande-grote-recreatiewoning-eigen-grond9.jpg" />
+</Images>
+<User>
+<UserID>NL12</UserID>
+<UserType>particulier</UserType>
+<Firstname>Peter</Firstname>
+<Lastname>Visser</Lastname>
+<Email>peter@visser.nl</Email>
+<City>Breukelen</City>
+<Zip>3621ZA</Zip>
+<Street> De Corridor 27</Street>
+<Province>Noord-Brabant</Province>
+<Country>NL</Country>
+<Phone>09004900900</Phone>
+<IP>192.168.172.0</IP>
+<LastUpdate>2014-12-13 10:15:23</LastUpdate>
+<url>http://www.veraned.nl</url>
+</User>
+</Ad>
+</Ads>

@@ -24,7 +24,7 @@ $fieldOptions2 = [
     float: left;
     position: relative;
     padding: 60px 0 120px;
-    background: #f1f1ef url(http://verkopen.dev/admin/images/login-bg.jpg) no-repeat top center;
+    background: #f1f1ef url(../images/login-bg.jpg) no-repeat top center;
     background-size: cover;
 }
 .login-box-body, .register-box-body {

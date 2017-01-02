@@ -10,10 +10,15 @@ use backend\modules\categories_attribute\models\CategoriesAttributes;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use Yii;
+use yii\helpers\Url;
 use yii\db\Query;
 use frontend\modules\postad\models\PostAdAttributes;
 use backend\modules\adformattribute\models\AdFormAttribute;
 use backend\modules\platforms\models\Platforms;
+use frontend\modules\postad\models\PostedAd;
+use frontend\modules\postad\models\Files;
+use yii\web\UploadedFile;
+use frontend\modules\postad\models\PostedAdStatus;
 /**
  * Default controller for the `postad` module
  */
@@ -96,15 +101,38 @@ class DefaultController extends Controller
     		if(!empty($subcat_id)){
 	        	$sname = Categories::find()->where(['uid'=>$subcat_id])->one();
 	        	$sub_cat_name = $sname['name'];
+	        	$m_s_price = $sname['price'];
 	        } else {
 	        	$sub_cat_name = "";
+	        	$m_s_price = 0;
 	        }
     		$ssub_name = Categories::find()->where(['uid'=>$subsubcat_id])->one();
     		$sub_sub_cat_name = $ssub_name['name'];
 
-            /** attributes as per category selection **/
+    		/** Price Calculation **/
+    		$m_price = $cname['price'];
+    		$m_s_price;
+    		$m_s_s_price = $ssub_name['price'];
+
+    		if($m_s_s_price>0) {
+    			$finalPrice = $m_s_s_price;
+    		} elseif ($m_s_price>0) {
+    			$finalPrice = $m_price;
+    		} elseif ($m_price>0) {
+    			$finalPrice = $m_price;
+    		} else {
+    			$finalPrice = 0;
+    		}
+
+            /** attributes main category **/
     		$attributes = self::getAttributes($category_id);
 
+    		/** attributes Sub category **/
+    		$attributes_sub = self::getAttributes($subcat_id);
+
+    		/** attributes Sub category **/
+    		$attributes_sub_sub = self::getAttributes($subsubcat_id);
+    		//print_r($attributes);
     		/** form fields **/
             $formfeilds = AdFormAttribute::find()->where(['status'=>0])->all();
 
@@ -113,7 +141,7 @@ class DefaultController extends Controller
             //$platformsList=ArrayHelper::map($platforms,'id','name');
 
             /** Post data page step one **/
-    		return $this->render('ad-description', ['model'=>$model, 'catList'=>$catList, 'info'=>$info, 'cname'=>$main_cat_name, 'sname'=>$sub_cat_name, 'ssname'=>$sub_sub_cat_name, 'attributes'=>$attributes, 'uerprofile'=>$uerprofile, 'cattribute'=>$cattribute, 'formfeilds'=>$formfeilds, 'platforms'=>$platforms]);
+    		return $this->render('post-ad-steps', ['model'=>$model, 'catList'=>$catList, 'info'=>$info, 'cname'=>$main_cat_name, 'sname'=>$sub_cat_name, 'ssname'=>$sub_sub_cat_name, 'attributes'=>$attributes, 'attributes_sub'=>$attributes_sub, 'attributes_sub_sub'=>$attributes_sub_sub, 'uerprofile'=>$uerprofile, 'cattribute'=>$cattribute, 'formfeilds'=>$formfeilds, 'platforms'=>$platforms, 'finalPrice'=>$finalPrice]);
 
     	} else {
 
@@ -122,11 +150,7 @@ class DefaultController extends Controller
     	}
     }
 
-    public function actionAdCategory(){
-    	$model = new PostAd;
 
-    	return $this->render('ad-description', ['model'=>$model]);
-    }
 
     /** 
 	 * controller action to fetch the list
@@ -168,7 +192,7 @@ class DefaultController extends Controller
 	        if ($parents != null) {
 	            $cat_id = $parents[0];
 	            $out = self::getSubCatList($cat_id);
-	            echo Json::encode(['output'=>$out, 'selected'=>'']);
+	            echo Json::encode(['output'=>$out, 'selected'=>'', 'disabled'=>true]);
 	            return;
 	        }
 	    }
@@ -200,71 +224,127 @@ class DefaultController extends Controller
     	return $data;
 	}
 
-	/*public function getAttributes($category_id) {
-        $attributesArray = [];
-        $attribute = CategoriesAttributes::find()->where(['category_id'=>$category_id, 'type'=>'property', 'parent'=>0])->all();
-        $maincat = [];
-        foreach ($attribute as $key => $value) {
-        	//$attributesArray['parent'][]= $value->name;
-        	$attribute_child = CategoriesAttributes::find()->where(['parent'=>$value->uid, 'type'=>'value', 'category_id'=>0])->all();
-        	$child_attribute = [];
-        	if(empty($attribute_child)) {
-        		$attributesArray[$key]['parent'][$key][$value->name] = $value->name;
-        	} else {
-        		foreach ($attribute_child as $keyc => $valuec) {
-        			$attributesArray[$key]['parent'][$key][$value->name]['child'][] = $valuec->name;
-        		}
-        	}
-        	
+	public function actionAdpost()
+	{
+		$PostedAd = new PostedAd;
+		$Files = new Files;
+		$model = new PostAd();
+        if(Yii::$app->request->isPost){
+            $post = Yii::$app->request->post();
+            //print_r($post); die();
+            $uploads = Yii::getAlias('@frontend').'/web/images/ad/';
+            $model->files = UploadedFile::getInstances($model, 'files');
+            $PostedAd->date = date("m-d-Y H:i:s");
+            $PostedAd->data = json_encode($post);
+            $PostedAd->save();
+            $pid = $PostedAd->id;
+            foreach ($model->files as $file) {
+            	$Files->posted_ad_id = $pid;
+            	$imageName = rand(9999, 999999);
+	            $Files->filename = $imageName . '.' . $file->extension;
+	            $file->saveAs($uploads.$Files->filename);
+	            $Files->url = Url::home('http').'images/ad/'.$Files->filename;
+	            if(!empty($Files->filename) && $Files->validate()) {
+                  $Files->save();
+            	}
+            }
+            $platforms = array_filter($post['PostAd']['platforms']);
+			foreach ($platforms as $key => $value) {
+				echo $value;
+			}
+			$source_xml = self::XMLForAanbodpagina($post,$pid);
+			$out = self::postOnAanbodpagina($source_xml,$pid);
+            return $this->redirect(Url::to(['/postad/default/progress']));
         }
-        //print("<pre>".print_r($attributesArray,true)."</pre>");
-        foreach ($attributesArray as $key => $value) {
-        	print("<pre>".print_r($value['parent'][$key],true)."</pre>");
-        	//echo $value['parent'];
-        	foreach ($value as $main_value) {
-        		# code...
-        	}
-        }
-        die();
+    }
+
+    public function postOnAanbodpagina($source_xml,$pid)
+    {
+    	//$xml = file_get_contents($source_xml);
+    	$PostedAdStatus = new PostedAdStatus;
+    	$PostedAdStatus->posted_ad_id = $pid;
+    	$xml = $source_xml;
+		$url = 'http://api.aanbodpagina.nl/VerkopenAPI.aspx';
+		$post_data = array("xml" => $xml);
+		$stream_options = array(
+		    'http' => array(
+		       'method'  => 'POST',
+		       'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+		       'content' => http_build_query($post_data),
+		    ),
+		);
+		$context  = stream_context_create($stream_options);
+		$response = file_get_contents($url, null, $context);
+		if (strpos($response,'successfully') !== false) {
+		    $ad_status = 1;
+
+		} else {
+			$ad_status = 0;
+		}
+		$PostedAdStatus->user_id = Yii::$app->user->getId();
+		$PostedAdStatus->platform = "Aanbodpagina.nl";
+    	$PostedAdStatus->payment_status = 0;
+    	$PostedAdStatus->api_response = $ad_status;
+    	if ($PostedAdStatus->validate()) {
+    		$PostedAdStatus->save();
+    	} else {
+    		print_r($PostedAdStatus->errors);
+    	}
+		return $ad_status;
     }
 
 
-    public function getAttributes($category_id, $selected_category_id, $level_string) 
+    public function XMLForAanbodpagina($post,$pid)
     {
-        $select_str =[];
-        if(!$level_string)
-	      {
-	          $level_string='';
-	      }
-
-        if ($cat_arr = CategoriesAttributes::find()->where(['category_id'=>$category_id, 'type'=>'property', 'parent'=>0])->all()) {
-            foreach ($cat_arr as $keyv => $cat) {
-                $select_str[]=$cat->name;
-            }
-        }
-        else
-        {
-            return false;
-        }
-       
-        return $select_str;
-        print("<pre>".print_r($select_str,true)."</pre>");
-        die();
+    	$files = Files::find()->where(['posted_ad_id'=>$pid])->all();
+    	$xml = '<?xml version="1.0" encoding="utf-8"?>
+				<Ads>
+				<Ad action="save">
+				<AdID>NL6</AdID>
+				<AdDate>'.date("Y-d-m H:i:s").'</AdDate>
+				<Title>'.$post['Ad_Title'].'</Title>
+				<Description>
+				<![CDATA['.addslashes($post['Ad_Text']).']]>
+				</Description>
+				<SubCategoryID>1031</SubCategoryID>
+				<Price>10.00</Price>
+				<PriceSort>Bieden</PriceSort>
+				<AllowBids>true</AllowBids>
+				<AdType>Aangeboden</AdType>
+				<Url></Url>
+				<UrlContact></UrlContact>
+				<ItemState>nieuw</ItemState>
+				<Images>';
+				foreach ($files as $key => $value) {
+				$xml .='<Image url="'.$value->url.'" />';
+				}
+				$xml .='</Images>
+				<User>
+				<UserID>NL12</UserID>
+				<UserType>particulier</UserType>
+				<Firstname>'.$post['PostAdContactInfo']['name_at_ad'].'</Firstname>
+				<Lastname>'.$post['PostAdContactInfo']['name_at_ad'].'</Lastname>
+				<Email>'.$post['PostAdContactInfo']['email_address'].'</Email>
+				<City>Breukelen</City>
+				<Zip>'.$post['PostAdContactInfo']['zip_code'].'</Zip>
+				<Street>'.$post['PostAdContactInfo']['location'].'</Street>
+				<Province>Noord-Brabant</Province>
+				<Country>NL</Country>
+				<Phone>09004900900</Phone>
+				<IP>'.Yii::$app->getRequest()->getUserIP().'</IP>
+				<LastUpdate>'.date("Y-d-m H:i:s").'</LastUpdate>
+				<url>'.$post['Website'].'</url>
+				</User>
+				</Ad>
+				</Ads>';
+		return $xml;
     }
 
-    public function getSubAttributes($uid, $selected_category_id, $level_string) 
-    {
-        $data =[];
-        if ($cat_arr = CategoriesAttributes::find()->where(['parent'=>$uid, 'type'=>'value', 'category_id'=>0])->all()) {
-            foreach ($cat_arr as $cat) {
-                $data[]= "-----".$cat->name."<br />";
-            }
-        }
-        else
-        {
-            return false;
-        }
-        return $data;
-    }*/
 
+    public function actionProgress()
+    {
+    	$userId = Yii::$app->user->getId();
+    	$ads = PostedAdStatus::find()->where(['user_id'=>$userId])->all();
+    	return $this->render('progress', ['ads'=>$ads]);
+    }
 }

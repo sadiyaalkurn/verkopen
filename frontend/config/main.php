@@ -53,6 +53,9 @@ return [
         'postad' => [
             'class' => 'frontend\modules\postad\Module',
         ],
+        'page' => [
+            'class' => 'frontend\modules\page\Module',
+        ],
     ],
     'params' => $params,
 ];

@@ -9,10 +9,11 @@ BootstrapPluginAsset::register($this);
 BootstrapDialogAsset::register($this);
 
 $this->title = $cname->name." : SubCategories";
+$pid = Yii::$app->getRequest()->getQueryParam('id')
 ?>
 <div class="content-type-index">
 	<p>
-		<?php echo HTML::a('Add New', ['create'], ['class' => 'btn btn-success create_data', 'id' => '']) ?>
+		<?php echo HTML::a('Add New', ['create', 'is_main'=>$pid], ['class' => 'btn btn-success create_data', 'id' => '']) ?>
 	</p>
 
 	<?php echo GridView::widget([
@@ -23,7 +24,7 @@ $this->title = $cname->name." : SubCategories";
             'name',
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template'=>'{update} {delete}',
+                'template'=>'{update} {view} {delete}',
                 'buttons' => [
                     'delete' => function ($url, $model) {
                         return Html::a('<span class="fa fa-trash"></span>', $url, [
@@ -37,16 +38,25 @@ $this->title = $cname->name." : SubCategories";
                             'title' => Yii::t('app', 'Update'),
                             'class' => 'btn create_data btn-xs'
                         ]);
+                    },
+                    'view' => function( $url, $model ) {
+                        return Html::a('<span class="fa fa-eye"></span>', $url, [
+                            'title' => Yii::t('app', 'View'),
+                            'class' => 'btn btn-xs'
+                        ]);
                     }
                 ],
-                'urlCreator' => function ($action, $model, $key, $index) {
+                'urlCreator' => function ($action, $model, $key, $index, $pid) {
                     if ( $action === "update" ) {
-                        $url = Yii::$app->urlManager->createUrl(['/categories/default/update','id'=>$model->uid]);
+                        $url = Yii::$app->urlManager->createUrl(['/categories/default/update','id'=>$model->uid, 'parent'=>$model->parent]);
                         return $url;
                     } elseif($action === 'delete'){
                         $url = Yii::$app->urlManager->createUrl(['/categories/default/delete','id'=>$model->uid]);
                         return $url;
-                    }
+                    } elseif($action === 'view'){
+                        $url = Yii::$app->urlManager->createUrl(['/categories/default/viewchild','id'=>$model->uid, 'parent'=>$model->parent]);
+                        return $url;
+                    }  
                 }
             ],
         ],

@@ -11,6 +11,7 @@ use Yii;
  * @property string $name
  * @property integer $parent
  * @property string $parent_list
+ * @property decimal $price
  */
 class Categories extends \yii\db\ActiveRecord
 {
@@ -28,7 +29,7 @@ class Categories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent'], 'integer'],
+            [['parent','price'], 'integer'],
             [['parent_list'], 'string'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -43,6 +44,7 @@ class Categories extends \yii\db\ActiveRecord
             'uid' => 'Uid',
             'name' => 'Name',
             'parent' => 'Parent',
+            'price' => 'Price',
             'parent_list' => 'Parent List',
         ];
     }

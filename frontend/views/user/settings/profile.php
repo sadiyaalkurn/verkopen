@@ -44,14 +44,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'enableClientValidation' => false,
                     'validateOnBlur'         => false,
                 ]); ?>
+                <?= $form->field($model, 'fname') ?>
 
-                <?= $form->field($model, 'name') ?>
+                <?= $form->field($model, 'lname') ?>
 
-                <?= $form->field($model, 'public_email') ?>
+                <?= $form->field($model, 'city') ?>
 
-                <?= $form->field($model, 'website') ?>
+                <?= $form->field($model, 'state') ?>
 
-                <?= $form->field($model, 'location') ?>
+                <?= $form->field($model, 'zipcode') ?>
 
                 <?= $form
                     ->field($model, 'timezone')
@@ -63,16 +64,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         )
                     ); ?>
 
-                <?= $form
-                    ->field($model, 'gravatar_email')
-                    ->hint(
-                        \yii\helpers\Html::a(
-                            Yii::t('user', 'Change your avatar at Gravatar.com'),
-                            'http://gravatar.com'
-                        )
-                    ) ?>
-
-                <?= $form->field($model, 'bio')->textarea() ?>
+                <?= $form->field($model, 'phone') ?>
+                <?= $form->field($model, 'street') ?>
 
                 <div class="form-group">
                     <div class="col-lg-offset-3 col-lg-9">

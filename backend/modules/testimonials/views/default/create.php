@@ -3,6 +3,7 @@
 	use yii\widgets\ActiveForm;
 	use dosamigos\ckeditor\CKEditor;
 
+
 	$form = ActiveForm::begin(['id' => 'create-data-form', 'action' => '']);
 ?>
 	<div class="fomr-group">

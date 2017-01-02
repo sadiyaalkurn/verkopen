@@ -3,7 +3,7 @@
 namespace backend\modules\user;
 
 /**
- * user module definition class
+ * users module definition class
  */
 class Module extends \yii\base\Module
 {

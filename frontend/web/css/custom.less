@@ -12,8 +12,6 @@ img {
 	max-width: 100%;
 }
 
-
-
 .full-width {
 	width: 100%;
 	float: left;
@@ -58,11 +56,6 @@ img {
 	background-color: darken(@btn-info, 6.5%);
 	border-color: darken(@btn-info, 6.5%);
 }
-
-
-
-
-
 .btn-success {
 	background-color: @btn-success;
 	border-color: @btn-success;
@@ -651,7 +644,6 @@ nav.custom-bootsnav.bootsnav.navbar-brand-top ul.nav {margin: 0 0 -4px 0;}
 
 
 /*==== Add Description css ===*/
-<<<<<<< HEAD
 
 .add-desc-section{
 	.full-width;
@@ -694,51 +686,91 @@ nav.custom-bootsnav.bootsnav.navbar-brand-top ul.nav {margin: 0 0 -4px 0;}
 	}
 }
 
-=======
-
-.add-desc-section{
-	.full-width;
-	padding: 50px 0px 60px;
-	.container {
-	  	h2 {
-	  		color: #ee1c25;
-	  		font-size: 40px;
-	  		line-height: 95px;
-	  		margin: 0px 0px 25px; padding: 0px;
-	  		font-family: 'ProximaNovaSemibold';
-	  		text-transform: @cap-txt;
-	  	}
-	  	p {
-	  		font-size: 15px;
-	  		color: #464545;
-	  		line-height: 28px;
-	  	}	
-	  	.field-row{margin-bottom: 40px;}
-	  	.checkbox-inline, .radio-inline {
-	  		padding-left: 0px; 
-	  		width: 140px;
-	  	}
-	  	.icheckbox_square-blue, .iradio_square-blue {
-	  		background: url(../images/blue.png) no-repeat;
-	  	}
-
-	  	.icheckbox_square-blue {background-position: 0 0 !important;}
-	  	.icheckbox_square-blue.checked, .icheckbox_square-blue.checked:hover {background-position: -48px 0 !important;}
-	  	.icheckbox_square-blue:hover {background-position: -24px 0 !important;}
-
-	  	.iradio_square-blue {background-position: -120px 0 !important;}
-	  	.iradio_square-blue.checked, .iradio_square-blue.checked:hover {background-position: -168px 0 !important;}
-	  	.iradio_square-blue:hover {background-position: -144px 0 !important;}
-
-	  	.form-control{
-	  		border-radius: 5px;
-			height: 60px;
-		}
-	}
-}
-
->>>>>>> e31abc40c1be1aa624c639ca57de652ae4f06258
 /*==== Add item css End  ===*/
+
+
+/*==== Select Category css Start  ===*/
+.select-category {
+	.full-width; padding: 50px 0 20px;
+	.sub-heading {.full-width; font-size: 42px; color: @btn-warning; text-transform: uppercase; font-weight: 600; padding: 10px 0 20px;}
+	.form-control {border-radius: 2px; height: 56px; border-color: #c2c1c2; font-size: 14px; width: 100%;}
+	.btn {border-radius: 2px; padding-left: 30px; padding-right: 30px; height: 56px;}
+	.search {.full-width; padding-bottom: 15px;
+		.form-group {width: 35%;}
+	}
+	.panel {border-radius: 0px;}
+	.panel-heading {font-size: 18px; padding: 12px 15px;}
+	.panel-body {height: 330px; overflow: hidden; padding: 0px;}
+	.scrollbar {height: 100%; width: 100%; float: left; overflow-x: hidden; overflow-y: scroll; padding: 15px;
+		a {color: @btn-grey; font-size: 16px; &:hover {color: @btn-warning; text-decoration: none;}}
+	}
+
+}
+/*==== Select Category css End  ===*/
+
+/*==== Progress page css Start  ===*/
+.progress-page {
+	.full-width; padding: 90px 0 20px;
+	ul {margin: 0px auto; width: 85%; display: table; table-layout: fixed; padding: 0px; list-style: none;
+		li {.full-width; border: 1px solid #dddbdc; margin-bottom: 20px; padding: 15px; display: flex; color: #595959; line-height: 31px;}
+	}
+	.list-arrow {padding-right: 20px; float: left;}
+	.title {width: 20%; float: left;}
+	.status {width: 25%; float: left;}
+	.progreslink {
+		width: 50%; float: left;
+		.progress {margin-bottom: 0px; height: 30px; border-radius: 0px; box-shadow: none; border: 1px solid #dddbdc; background-color: #e5f7e5; margin-top: 2px;}
+		.progress-bar-success {background-color: #00b200;}
+		.dot {width: 26px; height: 26px; float: left; background-color: #00b200; border-radius: 100%; margin-top: 2px;}
+	}
+}
+/*==== Progress page css End  ===*/
+
+/*==== Choose AD Site css Start  ===*/
+.choose-ad-site {
+	.full-width; padding: 70px 0 20px;
+	.sub-heading {.full-width; font-size: 40px; color: @btn-warning; text-transform: uppercase; font-weight: 600; padding: 0px 0 20px;}
+	.form-control {border-radius: 2px; height: 48px; border-color: #c2c1c2; font-size: 14px; width: 100%;}
+	.btn {border-radius: 0px;}
+	.form-inline {.full-width; padding-bottom: 30px;
+		.image {padding-right: 35px;}
+		.text {padding-right: 10px; font-size: 20px; font-weight: bold; color: #404040;}
+		.inputs {width: 26%;}
+		.btn {margin-top: 8px; border-radius: 2px; padding-left: 20px; padding-right: 20px; height: 48px;}
+	}
+
+	ul {margin: 0px auto; width: 100%; display: table; table-layout: fixed; padding: 0px; list-style: none;
+		li {.full-width; border: 1px solid #dddbdc; margin-bottom: 20px; padding: 15px; display: flex; color: #595959; line-height: 31px;}
+	}
+	.list-arrow {padding-right: 20px; float: left;}
+	.title {width: 20%; float: left;}
+	.status {width: 20%; float: left;}
+	.description {width: 35%; float: left;}
+	.action {width: 20%; float: left;}
+	.mk-trc i {width: 45px; cursor: pointer;}
+	.mk-trc {margin-bottom: 0px; float: right; margin-top: 6px;}
+	.mk-trc input:checked + label i {background: @btn-warning;}
+	.mk-trc input:checked + label i:before {left: 22px;}
+	.mk-trc[data-text="true"] i:after {content: "\f00d"; font-family: 'FontAwesome';}
+	.mk-trc[data-text="true"] input:checked + label i:after {content: "\f00c"; font-family: 'FontAwesome';}
+
+	.panel {border-radius: 0px; .full-width;}
+	.panel-heading {font-size: 18px; padding: 12px 15px; text-align: center; text-transform: uppercase;}
+	.panel-body {
+		padding: 0px; .full-width;
+		.text {.full-width; font-size: 14px; text-align: center; padding: 15px 10px; border-bottom: 1px solid #dddbdc;}
+		.list {.full-width; font-size: 15px; padding: 15px 10px; border-bottom: 1px solid #dddbdc; font-size: 600; color: #595959;
+			span {float: right; color: @btn-warning; font-weight: normal;}
+		}
+		.total {.full-width; font-size: 15px; padding: 15px 10px; border-bottom: 1px solid #dddbdc; color: @btn-warning;
+			span {float: right;}
+		}
+		.button {.full-width;text-align: center; padding: 15px 10px;}
+		.btn {padding-left: 25px; padding-right: 25px;}
+	}
+
+}
+/*==== Choose AD Site css End  ===*/
 
 
 

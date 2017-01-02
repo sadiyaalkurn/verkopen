@@ -12,7 +12,7 @@ $this->title = "Categories";
 ?>
 <div class="content-type-index">
 	<p>
-		<?php echo HTML::a('Add New', ['create'], ['class' => 'btn btn-success create_data', 'id' => '']) ?>
+		<?php echo HTML::a('Add New', ['create','is_main'=>0], ['class' => 'btn btn-success create_data', 'id' => '']) ?>
 	</p>
 
 	<?php echo GridView::widget([
@@ -21,6 +21,7 @@ $this->title = "Categories";
 
             //'text',
             'name',
+            'price',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template'=>'{update} {view} {delete}',
